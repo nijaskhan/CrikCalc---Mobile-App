@@ -33,3 +33,21 @@ export const secondRow = [
         score: 6
     }
 ]
+
+export const thirdRow = [
+    {
+        name: 'boundaryExtras',
+        visual: '5',
+        score: 5
+    },
+    {
+        name: 'wide_ball',
+        visual: 'WD',
+        score: 1
+    },
+    {
+        name: 'sixExtras',
+        visual: '7',
+        score: 7
+    }
+]

@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     textTitle: {
-        color: '#bdc3c7',
+        color: '#D1D1D1',
         fontSize: 15,
         letterSpacing: 2
     },
