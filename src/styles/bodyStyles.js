@@ -14,7 +14,7 @@ export const runBtnStyles = StyleSheet.create({
     container: {
         display: 'flex',
         flexDirection: 'row',
-        marginBottom: 30,
+        marginBottom: 25,
     },
     border: {
         height: 80,
