@@ -6,12 +6,38 @@ export const headerStyles = StyleSheet.create({
         backgroundColor: '#591FFF',
     },
     innerContainer: {
-        display: 'flex',
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     textTitleContainer: {
-        height: '100%',
+        height: '80%',
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    overTextContainer: {
+        width: '80%',
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    overTextTitle: {
+        color: '#D1D1D1',
+        fontWeight: 'normal',
+        fontSize: 16,
+        letterSpacing: 1,
+        // justifyContent: 'flex-start'
+    },
+    resetText: {
+        fontWeight: '500',
+        color: '#ffffff',
+        fontSize: 15,
+        letterSpacing: 1
+    },
+    overText: {
+        fontWeight: 'bold',
+        color: '#ffffff',
+        fontSize: 15
     },
     textTitle: {
         color: '#D1D1D1',

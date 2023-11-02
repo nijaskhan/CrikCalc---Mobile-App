@@ -10,6 +10,16 @@ const Header = () => {
                     <Text style={headerStyles.textTitle}>Total runs</Text>
                     <Text style={headerStyles.textRuns}>0 - 0</Text>
                 </View>
+                <View style={headerStyles.overTextContainer}>
+                    <Text
+                        style={headerStyles.overTextTitle}
+                    >
+                        overs: <Text style={headerStyles.overText}>1.5</Text>
+                    </Text>
+                    <Text style={headerStyles.resetText}>
+                        RESET
+                    </Text>
+                </View>
             </View>
         </View>
     );
