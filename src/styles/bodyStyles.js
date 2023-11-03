@@ -17,14 +17,14 @@ export const bodyStyles = StyleSheet.create({
         alignItems: 'center',
     },
     textInput: {
-        height: 40,
-        width: 60,
+        height: 50,
+        width: 70,
         margin: 0,
         padding: 10,
         borderWidth: 1,
         borderColor: '#591FFF',
         borderRadius: 9,
-        fontSize: 15,
+        fontSize: 19,
         fontWeight: 'bold'
     }
 })
