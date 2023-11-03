@@ -26,6 +26,10 @@ export const bodyStyles = StyleSheet.create({
         borderRadius: 9,
         fontSize: 19,
         fontWeight: 'bold'
+    },
+    overViewContainer: {
+        marginTop: 40,
+        marginHorizontal: 20
     }
 })
 
@@ -87,4 +91,24 @@ export const runBtnStyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
+    overViewborder: {
+        height: 50,
+        width: 50,
+        backgroundColor: '#b2bec3',
+        borderRadius: 60,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginHorizontal: 20,
+        marginTop: 12
+    },
+    overViewText: {
+        fontSize: 30,
+        fontWeight: 'bold',
+        color: '#ffffff'
+    },
+    overOuterContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        flexWrap: "wrap",
+    }
 });

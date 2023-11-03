@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import RunBtn from './bodyComponents/RunBtn';
+import OverViewComponent from './bodyComponents/OverViewComponet';
 import { firstRow, secondRow, thirdRow } from '../constants/scores';
 import { bodyStyles, runBtnStyles } from '../styles/bodyStyles';
 import { Image, ScrollView, TextInput, View } from 'react-native';
@@ -31,6 +32,9 @@ export default function Body() {
                         />
                     </View>
                 </View>
+            </View>
+            <View style={bodyStyles.overViewContainer}>
+                <OverViewComponent />
             </View>
         </ScrollView>
     );
