@@ -8,6 +8,25 @@ export const bodyStyles = StyleSheet.create({
         marginTop: 30,
         alignItems: 'center',
     },
+    textInputContainer: {
+        flex: 1,
+        alignItems: 'center',
+    },
+    flexColoumn: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    textInput: {
+        height: 40,
+        width: 60,
+        margin: 0,
+        padding: 10,
+        borderWidth: 1,
+        borderColor: '#591FFF',
+        borderRadius: 9,
+        fontSize: 15,
+        fontWeight: 'bold'
+    }
 })
 
 export const runBtnStyles = StyleSheet.create({
@@ -61,5 +80,11 @@ export const runBtnStyles = StyleSheet.create({
         fontSize: 40,
         fontWeight: 'bold',
         color: '#ffffff'
-    }
+    },
+    sendBtn: {
+        height: 50,
+        width: 50,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
 });
