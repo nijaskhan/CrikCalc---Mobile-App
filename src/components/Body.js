@@ -16,6 +16,7 @@ export default function Body() {
                 <RunBtn runs={secondRow} />
                 <RunBtn runs={thirdRow} />
             </View>
+            {/* custome score UI */}
             <View style={bodyStyles.textInputContainer}>
                 <View style={bodyStyles.flexColoumn}>
                     <TextInput
@@ -34,6 +35,8 @@ export default function Body() {
                 </View>
             </View>
             <View style={bodyStyles.overViewContainer}>
+                <OverViewComponent />
+                <OverViewComponent />
                 <OverViewComponent />
             </View>
         </ScrollView>

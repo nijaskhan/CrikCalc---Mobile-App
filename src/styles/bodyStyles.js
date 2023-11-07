@@ -11,6 +11,7 @@ export const bodyStyles = StyleSheet.create({
     textInputContainer: {
         flex: 1,
         alignItems: 'center',
+        marginTop: 20
     },
     flexColoumn: {
         flexDirection: 'row',
@@ -28,8 +29,9 @@ export const bodyStyles = StyleSheet.create({
         fontWeight: 'bold'
     },
     overViewContainer: {
-        marginTop: 40,
-        marginHorizontal: 20
+        marginTop: 30,
+        marginHorizontal: 20,
+        marginBottom: 10
     }
 })
 
@@ -98,7 +100,7 @@ export const runBtnStyles = StyleSheet.create({
         borderRadius: 60,
         justifyContent: 'center',
         alignItems: 'center',
-        marginHorizontal: 20,
+        marginHorizontal: 5,
         marginTop: 12
     },
     overViewText: {
