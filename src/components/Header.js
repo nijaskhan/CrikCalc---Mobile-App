@@ -6,18 +6,8 @@ import {AppContext} from '../store/AppContext';
 const Header = () => {
     const {
         currentOver,
-        changeOver,
         currentBall,
-        changeBall
     } = useContext(AppContext);
-
-    const handleOver = () => {
-        if (currentBall < 6) {
-            changeBall(currentBall + 1);
-        } else {
-            changeOver(currentOver + 1);
-        }
-    }
 
     return (
         <View style={headerStyles.container}>

@@ -7,7 +7,7 @@ import { Image, ScrollView, TextInput, View } from 'react-native';
 import {AppContext} from '../store/AppContext';
 
 export default function Body() {
-    const {score, onChangeScore} = useContext(AppContext);
+    const {customScore, onChangeScore} = useContext(AppContext);
 
     return (
         <ScrollView>
@@ -23,7 +23,7 @@ export default function Body() {
                         keyboardType='numeric'
                         placeholder='score'
                         onChangeText={onChangeScore}
-                        value={score}
+                        value={customScore}
                     />
                     <View style={runBtnStyles.sendBtn} >
                         <Image
