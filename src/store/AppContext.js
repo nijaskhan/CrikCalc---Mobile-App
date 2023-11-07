@@ -11,18 +11,21 @@ export default function CreateAppContext({ children }) {
 
     const [ballLimit, changeBallLimit] = useState(5);
 
+    const [wickets, changeWicket] = useState(0);
+
     const handleOver = (runsObj) => {
         console.log(runsObj);
+        if(runsObj.name==='wicket'){
+            changeWicket(wickets+1);
+        }
         if (currentBall < ballLimit) {
             if (runsObj.name === 'wide_ball') {
-                // console.log('logic worked');
                 changeBallLimit(ballLimit+1);
             }
             changeRuns(runs + runsObj.score);
             changeBall(currentBall + 1);
         } else {
             if (runsObj.name === 'wide_ball') {
-                // console.log('2nd logic worked');
                 changeRuns(runs + runsObj.score);
                 changeBallLimit(ballLimit+1);
             }else{
@@ -45,7 +48,9 @@ export default function CreateAppContext({ children }) {
                 onChangeScore,
                 handleOver,
                 runs,
-                changeRuns
+                changeRuns,
+                changeWicket,
+                wickets
             }}
         >
             {children}

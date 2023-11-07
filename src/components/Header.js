@@ -10,7 +10,9 @@ const Header = () => {
         changeBall,
         changeOver,
         runs,
-        changeRuns
+        changeRuns,
+        changeWicket,
+        wickets
     } = useContext(AppContext);
 
     return (
@@ -18,7 +20,7 @@ const Header = () => {
             <View style={headerStyles.innerContainer}>
                 <View style={headerStyles.textTitleContainer}>
                     <Text style={headerStyles.textTitle}>Total runs</Text>
-                    <Text style={headerStyles.textRuns}>{runs} - 0</Text>
+                    <Text style={headerStyles.textRuns}>{runs} - {wickets}</Text>
                 </View>
                 <View style={headerStyles.overTextContainer}>
                     <Text
@@ -33,6 +35,7 @@ const Header = () => {
                             changeBall(0);
                             changeOver(0);
                             changeRuns(0);
+                            changeWicket(0);
                         }}
                     >
                         <Text style={headerStyles.resetText} >
