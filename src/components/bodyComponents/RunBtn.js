@@ -1,8 +1,11 @@
-import { Text, View } from 'react-native';
-import React from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
+import React, { useContext } from 'react';
 import { runBtnStyles } from '../../styles/bodyStyles';
+import { AppContext } from '../../store/AppContext';
 
 export default function RunBtn(props) {
+    const { handleOver } = useContext(AppContext);
+
     const getButtonStyle = (btn) => {
         if (btn.name === 'wicket') {
             return runBtnStyles.redBorder;
@@ -19,18 +22,20 @@ export default function RunBtn(props) {
         <View style={runBtnStyles.container}>
             {
                 props.runs && props.runs.map((btn) => (
-                    <View
+                    <TouchableOpacity
                         key={btn.name}
-                        style={getButtonStyle(btn)}
+                        onPress={() => handleOver(btn)}
                     >
-                        <Text
-                            style={
-                                btn.name === 'wide_ball'
-                                    ? runBtnStyles.wideText
-                                    : runBtnStyles.text
-                            }
-                        >{btn.visual}</Text>
-                    </View>
+                        <View style={getButtonStyle(btn)} >
+                            <Text
+                                style={
+                                    btn.name === 'wide_ball'
+                                        ? runBtnStyles.wideText
+                                        : runBtnStyles.text
+                                }
+                            >{btn.visual}</Text>
+                        </View>
+                    </TouchableOpacity>
                 ))
             }
         </View>

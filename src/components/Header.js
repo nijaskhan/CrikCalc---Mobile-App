@@ -1,12 +1,16 @@
 import { Text, TouchableOpacity, View } from 'react-native';
 import React, { useContext } from 'react';
 import { headerStyles } from '../styles/headerStyles';
-import {AppContext} from '../store/AppContext';
+import { AppContext } from '../store/AppContext';
 
 const Header = () => {
     const {
         currentOver,
         currentBall,
+        changeBall,
+        changeOver,
+        runs,
+        changeRuns
     } = useContext(AppContext);
 
     return (
@@ -14,7 +18,7 @@ const Header = () => {
             <View style={headerStyles.innerContainer}>
                 <View style={headerStyles.textTitleContainer}>
                     <Text style={headerStyles.textTitle}>Total runs</Text>
-                    <Text style={headerStyles.textRuns}>0 - 0</Text>
+                    <Text style={headerStyles.textRuns}>{runs} - 0</Text>
                 </View>
                 <View style={headerStyles.overTextContainer}>
                     <Text
@@ -26,10 +30,12 @@ const Header = () => {
                     </Text>
                     <TouchableOpacity
                         onPress={() => {
-                            console.log('triggered reset');
+                            changeBall(0);
+                            changeOver(0);
+                            changeRuns(0);
                         }}
                     >
-                        <Text style={headerStyles.resetText}>
+                        <Text style={headerStyles.resetText} >
                             RESET
                         </Text>
                     </TouchableOpacity>
