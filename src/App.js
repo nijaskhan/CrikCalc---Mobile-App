@@ -3,13 +3,16 @@ import Header from './components/Header';
 import Body from './components/Body';
 import { SafeAreaView } from 'react-native';
 import { appStyles } from './styles/appStyles';
+import CreateAppContext from './store/AppContext';
 
 const App = () => {
     return (
-        <SafeAreaView style={appStyles.container}>
-            <Header />
-            <Body />
-        </SafeAreaView>
+        <CreateAppContext>
+            <SafeAreaView style={appStyles.container}>
+                <Header />
+                <Body />
+            </SafeAreaView>
+        </CreateAppContext>
     );
 }
 

@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import RunBtn from './bodyComponents/RunBtn';
 import OverViewComponent from './bodyComponents/OverViewComponet';
 import { firstRow, secondRow, thirdRow } from '../constants/scores';
 import { bodyStyles, runBtnStyles } from '../styles/bodyStyles';
 import { Image, ScrollView, TextInput, View } from 'react-native';
+import {AppContext} from '../store/AppContext';
 
 export default function Body() {
-    const [score, onChangeScore] = useState('');
+    const {score, onChangeScore} = useContext(AppContext);
 
     return (
         <ScrollView>
@@ -24,7 +25,6 @@ export default function Body() {
                         onChangeText={onChangeScore}
                         value={score}
                     />
-
                     <View style={runBtnStyles.sendBtn} >
                         <Image
                             source={require('../images/send-message.png')}
