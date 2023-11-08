@@ -32,6 +32,12 @@ export const bodyStyles = StyleSheet.create({
         marginTop: 30,
         marginHorizontal: 20,
         marginBottom: 10
+    },
+    bottomLine: {
+        borderBottomWidth: 1,
+        borderBottomColor: '#95a5a6',
+        borderStyle: 'solid',
+        padding: 5
     }
 })
 
@@ -100,7 +106,7 @@ export const runBtnStyles = StyleSheet.create({
         borderRadius: 60,
         justifyContent: 'center',
         alignItems: 'center',
-        marginHorizontal: 5,
+        marginHorizontal: 3,
         marginTop: 12
     },
     overViewText: {

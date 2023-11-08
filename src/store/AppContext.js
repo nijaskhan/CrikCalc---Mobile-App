@@ -13,26 +13,38 @@ export default function CreateAppContext({ children }) {
 
     const [wickets, changeWicket] = useState(0);
 
+    const [currentOverRunsView, changeCurrentOverRunsView] = useState([]);
+    const [oversView, changeCurrentOversView] = useState([]);
+
     const handleOver = (runsObj) => {
+        runsObj.id = `item_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
         console.log(runsObj);
-        if(runsObj.name==='wicket'){
-            changeWicket(wickets+1);
+        if (runsObj.name === 'wicket') {
+            changeWicket(wickets + 1);
         }
         if (currentBall < ballLimit) {
             if (runsObj.name === 'wide_ball') {
-                changeBallLimit(ballLimit+1);
+                changeBallLimit(ballLimit + 1);
             }
             changeRuns(runs + runsObj.score);
+            changeCurrentOverRunsView([...currentOverRunsView, runsObj]);
             changeBall(currentBall + 1);
         } else {
             if (runsObj.name === 'wide_ball') {
                 changeRuns(runs + runsObj.score);
-                changeBallLimit(ballLimit+1);
-            }else{
+                changeBallLimit(ballLimit + 1);
+            } else {
                 changeRuns(runs + runsObj.score);
+                // console.log('last ball: ' + runsObj.name);
+                // changeCurrentOverRunsView([...currentOverRunsView, runsObj]);
+                const updatedOverRunsView = [...currentOverRunsView, runsObj];
+                // console.log(currentOverRunsView, 'current over runs view', runsObj);
+                changeCurrentOversView([...oversView, updatedOverRunsView]);
                 changeOver(currentOver + 1);
                 changeBall(0);
                 changeBallLimit(5);
+                // overs_reading
+                changeCurrentOverRunsView([]);
             }
         }
     }
@@ -50,7 +62,11 @@ export default function CreateAppContext({ children }) {
                 runs,
                 changeRuns,
                 changeWicket,
-                wickets
+                wickets,
+                currentOverRunsView,
+                oversView,
+                changeCurrentOverRunsView,
+                changeCurrentOversView
             }}
         >
             {children}

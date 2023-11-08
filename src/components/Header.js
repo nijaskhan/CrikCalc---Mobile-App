@@ -12,7 +12,9 @@ const Header = () => {
         runs,
         changeRuns,
         changeWicket,
-        wickets
+        wickets,
+        changeCurrentOversView,
+        changeCurrentOverRunsView
     } = useContext(AppContext);
 
     return (
@@ -36,6 +38,8 @@ const Header = () => {
                             changeOver(0);
                             changeRuns(0);
                             changeWicket(0);
+                            changeCurrentOverRunsView([]);
+                            changeCurrentOversView([]);
                         }}
                     >
                         <Text style={headerStyles.resetText} >

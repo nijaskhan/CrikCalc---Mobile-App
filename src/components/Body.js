@@ -4,10 +4,15 @@ import OverViewComponent from './bodyComponents/OverViewComponet';
 import { firstRow, secondRow, thirdRow } from '../constants/scores';
 import { bodyStyles, runBtnStyles } from '../styles/bodyStyles';
 import { Image, ScrollView, TextInput, View } from 'react-native';
-import {AppContext} from '../store/AppContext';
+import { AppContext } from '../store/AppContext';
 
 export default function Body() {
-    const {customScore, onChangeScore} = useContext(AppContext);
+    const {
+        customScore,
+        onChangeScore,
+        oversView,
+        currentOverRunsView
+    } = useContext(AppContext);
 
     return (
         <ScrollView>
@@ -29,15 +34,21 @@ export default function Body() {
                     <View style={runBtnStyles.sendBtn} >
                         <Image
                             source={require('../images/send-message.png')}
-                            style={{width: 20, height: 20}}
+                            style={{ width: 20, height: 20 }}
                         />
                     </View>
                 </View>
             </View>
             <View style={bodyStyles.overViewContainer}>
-                <OverViewComponent />
-                <OverViewComponent />
-                <OverViewComponent />
+                <OverViewComponent currentOverRunsView={currentOverRunsView} />
+                {/* Map the main overs here */}
+                {
+                    oversView && oversView.slice().reverse().map((e, index) => (
+                        <View style={bodyStyles.bottomLine} key={`${e.id}_${index}`}>
+                            <OverViewComponent currentOverRunsView={e} />
+                        </View>
+                    ))
+                }
             </View>
         </ScrollView>
     );
