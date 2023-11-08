@@ -18,7 +18,7 @@ export default function CreateAppContext({ children }) {
 
     const handleOver = (runsObj) => {
         runsObj.id = `item_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
-        console.log(runsObj);
+        // console.log(runsObj);
         if (runsObj.name === 'wicket') {
             changeWicket(wickets + 1);
         }

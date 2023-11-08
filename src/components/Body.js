@@ -44,7 +44,10 @@ export default function Body() {
                 {/* Map the main overs here */}
                 {
                     oversView && oversView.slice().reverse().map((e, index) => (
-                        <View style={bodyStyles.bottomLine} key={`${e.id}_${index}`}>
+                        <View
+                            style={bodyStyles.bottomLine}
+                            key={`${e.id}_${index}`}
+                        >
                             <OverViewComponent currentOverRunsView={e} />
                         </View>
                     ))
