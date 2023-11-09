@@ -29,7 +29,7 @@ export default function RunBtn(props) {
                         <View style={getButtonStyle(btn)} >
                             <Text
                                 style={
-                                    btn.name === 'wide_ball'
+                                    btn.name === 'wide_ball' || btn.name === 'noBall'
                                         ? runBtnStyles.wideText
                                         : runBtnStyles.text
                                 }

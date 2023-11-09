@@ -1,5 +1,5 @@
 import { View, Text } from 'react-native';
-import React, { useContext } from 'react';
+import React from 'react';
 import { runBtnStyles } from '../../styles/bodyStyles';
 
 const OverViewComponet = (props) => {
@@ -7,14 +7,24 @@ const OverViewComponet = (props) => {
         <>
             <View style={runBtnStyles.overOuterContainer}>
                 {
-                    props.currentOverRunsView && props.currentOverRunsView.map((run, index) => (
+                    props?.currentOverRunsView && props.currentOverRunsView.map((run, index) => (
                         <View
                             key={`${run.id}_${index}`}
                             style={runBtnStyles.overViewborder}
                         >
-                            <Text
-                                style={runBtnStyles.overViewText}
-                            >{run.visual}</Text>
+                            {
+                                run.isNoBallExtras ? (
+                                    <View>
+                                        <Text style={runBtnStyles.noBallViewText}>
+                                            NB`{run.visual}
+                                        </Text>
+                                    </View>
+                                ) : (
+                                    <Text
+                                        style={runBtnStyles.overViewText}
+                                    >{run.visual}</Text>
+                                )
+                            }
                         </View>
                     ))
                 }

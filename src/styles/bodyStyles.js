@@ -38,7 +38,7 @@ export const bodyStyles = StyleSheet.create({
         borderBottomColor: '#95a5a6',
         borderStyle: 'solid',
         padding: 5
-    }
+    },
 })
 
 export const runBtnStyles = StyleSheet.create({
@@ -100,8 +100,8 @@ export const runBtnStyles = StyleSheet.create({
         alignItems: 'center'
     },
     overViewborder: {
-        height: 45,
-        width: 45,
+        height: 50,
+        width: 50,
         backgroundColor: '#b2bec3',
         borderRadius: 60,
         justifyContent: 'center',
@@ -113,6 +113,12 @@ export const runBtnStyles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
         color: '#ffffff',
+        padding: 2
+    },
+    noBallViewText: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#2c3e50',
         padding: 2
     },
     overOuterContainer: {

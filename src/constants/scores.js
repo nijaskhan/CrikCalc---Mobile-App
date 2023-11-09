@@ -36,9 +36,9 @@ export const secondRow = [
 
 export const thirdRow = [
     {
-        name: 'boundaryExtras',
-        visual: '5',
-        score: 5
+        name: 'noBall',
+        visual: 'NB',
+        score: 1
     },
     {
         name: 'wide_ball',
@@ -46,8 +46,8 @@ export const thirdRow = [
         score: 1
     },
     {
-        name: 'sixExtras',
-        visual: '7',
-        score: 7
+        name: 'three_run',
+        visual: '3',
+        score: 3
     }
 ]

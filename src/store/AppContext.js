@@ -16,12 +16,29 @@ export default function CreateAppContext({ children }) {
     const [currentOverRunsView, changeCurrentOverRunsView] = useState([]);
     const [oversView, changeCurrentOversView] = useState([]);
 
+    const [noBallStatus, setNoBallStatus] = useState(false);
+
     const handleOver = (runsObj) => {
         runsObj.id = `item_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
         // console.log(runsObj);
         if (runsObj.name === 'wicket') {
             changeWicket(wickets + 1);
         }
+        // NoBall Logic
+        if (runsObj.name === 'noBall') {
+            setNoBallStatus(true);
+            changeRuns(runs + runsObj.score);
+            return;
+        } else if (noBallStatus === true) {
+            changeRuns(runs + runsObj.score);
+            const newRunsObj = {...runsObj}
+            newRunsObj.isNoBallExtras = true;
+            changeCurrentOverRunsView([...currentOverRunsView, newRunsObj]);
+            setNoBallStatus(false);
+            // runsObj.isNoBallExtras = false;
+            return;
+        }
+        // till here - NoBall Logic
         if (currentBall < ballLimit) {
             if (runsObj.name === 'wide_ball') {
                 changeRuns(runs + runsObj.score);
