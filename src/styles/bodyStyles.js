@@ -100,8 +100,8 @@ export const runBtnStyles = StyleSheet.create({
         alignItems: 'center'
     },
     overViewborder: {
-        height: 50,
-        width: 50,
+        height: 45,
+        width: 45,
         backgroundColor: '#b2bec3',
         borderRadius: 60,
         justifyContent: 'center',
@@ -110,13 +110,15 @@ export const runBtnStyles = StyleSheet.create({
         marginTop: 12
     },
     overViewText: {
-        fontSize: 30,
+        fontSize: 24,
         fontWeight: 'bold',
-        color: '#ffffff'
+        color: '#ffffff',
+        padding: 2
     },
     overOuterContainer: {
         flex: 1,
         flexDirection: 'row',
         flexWrap: "wrap",
+        justifyContent: 'center',
     }
 });

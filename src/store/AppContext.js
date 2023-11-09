@@ -24,7 +24,11 @@ export default function CreateAppContext({ children }) {
         }
         if (currentBall < ballLimit) {
             if (runsObj.name === 'wide_ball') {
-                changeBallLimit(ballLimit + 1);
+                changeRuns(runs + runsObj.score);
+                changeCurrentOverRunsView([...currentOverRunsView, runsObj]);
+                // changeBallLimit(ballLimit + 1);
+                // changeBall(currentBall - 1);
+                return;
             }
             changeRuns(runs + runsObj.score);
             changeCurrentOverRunsView([...currentOverRunsView, runsObj]);
@@ -32,7 +36,10 @@ export default function CreateAppContext({ children }) {
         } else {
             if (runsObj.name === 'wide_ball') {
                 changeRuns(runs + runsObj.score);
-                changeBallLimit(ballLimit + 1);
+                changeCurrentOverRunsView([...currentOverRunsView, runsObj]);
+                // changeBallLimit(ballLimit + 1);
+                // changeBall(currentBall - 1);
+                return;
             } else {
                 changeRuns(runs + runsObj.score);
                 // console.log('last ball: ' + runsObj.name);
