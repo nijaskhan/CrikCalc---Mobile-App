@@ -90,7 +90,8 @@ export default function CreateAppContext({ children }) {
                 currentOverRunsView,
                 oversView,
                 changeCurrentOverRunsView,
-                changeCurrentOversView
+                changeCurrentOversView,
+                noBallStatus
             }}
         >
             {children}

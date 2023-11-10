@@ -4,7 +4,7 @@ import { runBtnStyles } from '../../styles/bodyStyles';
 import { AppContext } from '../../store/AppContext';
 
 export default function RunBtn(props) {
-    const { handleOver } = useContext(AppContext);
+    const { handleOver, noBallStatus } = useContext(AppContext);
 
     const getButtonStyle = (btn) => {
         if (btn.name === 'wicket') {
@@ -26,7 +26,12 @@ export default function RunBtn(props) {
                         key={btn.name}
                         onPress={() => handleOver(btn)}
                     >
-                        <View style={getButtonStyle(btn)} >
+                        <View style={
+                            noBallStatus === true && btn.name==='noBall'
+                                ? runBtnStyles.noBallBorder 
+                                : getButtonStyle(btn)
+                            
+                        } >
                             <Text
                                 style={
                                     btn.name === 'wide_ball' || btn.name === 'noBall'

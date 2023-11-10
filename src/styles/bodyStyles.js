@@ -65,6 +65,15 @@ export const runBtnStyles = StyleSheet.create({
         alignItems: 'center',
         marginHorizontal: 20
     },
+    noBallBorder: {
+        height: 80,
+        width: 80,
+        backgroundColor: '#95a5a6',
+        borderRadius: 60,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginHorizontal: 20
+    },
     greenBorder: {
         height: 80,
         width: 80,
