@@ -3,7 +3,7 @@ import RunBtn from './bodyComponents/RunBtn';
 import OverViewComponent from './bodyComponents/OverViewComponet';
 import { firstRow, secondRow, thirdRow } from '../constants/scores';
 import { bodyStyles, runBtnStyles } from '../styles/bodyStyles';
-import { Image, ScrollView, TextInput, View } from 'react-native';
+import { Image, ScrollView, TextInput, TouchableOpacity, View } from 'react-native';
 import { AppContext } from '../store/AppContext';
 
 export default function Body() {
@@ -11,8 +11,19 @@ export default function Body() {
         customScore,
         onChangeScore,
         oversView,
-        currentOverRunsView
+        currentOverRunsView,
+        handleOver
     } = useContext(AppContext);
+
+    const handleCustomRunBTn = () => {
+        const runObj = {
+            name: 'customRun',
+            visual: customScore,
+            score: parseInt(customScore)
+        }
+        handleOver(runObj);
+        onChangeScore('');
+    }
 
     return (
         <ScrollView>
@@ -31,17 +42,18 @@ export default function Body() {
                         onChangeText={onChangeScore}
                         value={customScore}
                     />
-                    <View style={runBtnStyles.sendBtn} >
-                        <Image
-                            source={require('../images/send-message.png')}
-                            style={{ width: 20, height: 20 }}
-                        />
-                    </View>
+                    <TouchableOpacity onPress={handleCustomRunBTn}>
+                        <View style={runBtnStyles.sendBtn} >
+                            <Image
+                                source={require('../images/send-message.png')}
+                                style={{ width: 20, height: 20 }}
+                            />
+                        </View>
+                    </TouchableOpacity>
                 </View>
             </View>
             <View style={bodyStyles.overViewContainer}>
                 <OverViewComponent currentOverRunsView={currentOverRunsView} />
-                {/* Map the main overs here */}
                 {
                     oversView && oversView.slice().reverse().map((e, index) => (
                         <View
