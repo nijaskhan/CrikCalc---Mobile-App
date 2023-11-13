@@ -31,7 +31,7 @@ export default function CreateAppContext({ children }) {
             return;
         } else if (noBallStatus === true) {
             changeRuns(runs + runsObj.score);
-            const newRunsObj = {...runsObj}
+            const newRunsObj = { ...runsObj }
             newRunsObj.isNoBallExtras = true;
             changeCurrentOverRunsView([...currentOverRunsView, newRunsObj]);
             setNoBallStatus(false);
@@ -65,6 +65,53 @@ export default function CreateAppContext({ children }) {
         }
     }
 
+    const handleUndoBtn = () => {
+        // if its `last ball`
+        if (currentBall === 0) {
+            if (currentOver === 0) return;
+            else {
+                const lastOverIndex = oversView.length - 1;
+                const lastOver = oversView[lastOverIndex];
+                oversView.pop();
+                const lastRunBtn = lastOver.pop();
+                if (noBallStatus) {
+                    changeRuns(runs - 1);
+                    setNoBallStatus(false);
+                    return;
+                }
+                if (lastRunBtn?.isNoBallExtras === true) {
+                    changeRuns(runs - (lastRunBtn.score + 1));
+                    return;
+                };
+                if(lastRunBtn.name === 'wicket') {
+                    changeWicket(wickets-1);
+                }
+                changeOver(currentOver - 1);
+                changeBall(5);
+                changeRuns(runs - lastRunBtn.score);
+                changeCurrentOverRunsView(lastOver);
+            }
+        } else {
+            // check if its `noBall`clg
+            if (noBallStatus) {
+                changeRuns(runs - 1);
+                setNoBallStatus(false);
+                return;
+            }
+            const lastRunBtn = currentOverRunsView.pop();
+            if (lastRunBtn?.isNoBallExtras === true) {
+                changeRuns(runs - (lastRunBtn.score + 1));
+                return;
+            }
+            // check if its `wide` or `normal_ball` or `wicket_ball`
+            if(lastRunBtn.name === 'wicket') {
+                changeWicket(wickets-1);
+            }
+            changeBall(currentBall - 1);
+            changeRuns(runs - lastRunBtn.score);
+        }
+    }
+
     return (
         <AppContext.Provider
             value={{
@@ -83,7 +130,9 @@ export default function CreateAppContext({ children }) {
                 oversView,
                 changeCurrentOverRunsView,
                 changeCurrentOversView,
-                noBallStatus
+                noBallStatus,
+                setNoBallStatus,
+                handleUndoBtn
             }}
         >
             {children}

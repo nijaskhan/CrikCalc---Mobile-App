@@ -46,14 +46,14 @@ export const bodyStyles = StyleSheet.create({
         borderWidth: .5,
         alignItems: 'center',
         marginLeft: 16,
-        backgroundColor: '#bdc3c7',
+        // backgroundColor: '#bdc3c7',
         borderRadius: 8
     },
     undoText: {
         fontWeight: "500",
         fontSize: 16,
         padding: 8,
-        color: '#000000',
+        color: '#2c3e50',
     }
 })
 

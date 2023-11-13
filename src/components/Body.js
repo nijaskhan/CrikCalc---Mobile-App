@@ -12,7 +12,8 @@ export default function Body() {
         onChangeScore,
         oversView,
         currentOverRunsView,
-        handleOver
+        handleOver,
+        handleUndoBtn,
     } = useContext(AppContext);
 
     const handleCustomRunBTn = () => {
@@ -51,11 +52,9 @@ export default function Body() {
                         </View>
                     </TouchableOpacity>
                 </View>
-                <TouchableOpacity 
+                <TouchableOpacity
                     style={bodyStyles.undoBtn}
-                    onPress={()=>{
-                        console.log('pressed undo btn');
-                    }}
+                    onPress={handleUndoBtn}
                 >
                     <Text style={bodyStyles.undoText} >
                         UNDO
