@@ -68,23 +68,47 @@ export default function CreateAppContext({ children }) {
     const handleUndoBtn = () => {
         // if its `last ball`
         if (currentBall === 0) {
-            if (currentOver === 0) return;
-            else {
-                const lastOverIndex = oversView.length - 1;
-                const lastOver = oversView[lastOverIndex];
-                oversView.pop();
-                const lastRunBtn = lastOver.pop();
+            if (currentOver === 0) {
+                if (noBallStatus) {
+                    setNoBallStatus(false);
+                    changeRuns(runs - 1);
+                    return;
+                }
+                const lastRunBtn = currentOverRunsView[currentOverRunsView.length - 1];
+                if (lastRunBtn?.isNoBallExtras) {
+                    currentOverRunsView.pop();
+                    changeRuns(runs - (lastRunBtn.score + 1));
+                } else if (lastRunBtn) {
+                    currentOverRunsView.pop();
+                    changeRuns(runs - lastRunBtn.score);
+                } else {
+                    console.log('go away !!!');
+                    return;
+                }
+            } else {
                 if (noBallStatus) {
                     changeRuns(runs - 1);
                     setNoBallStatus(false);
                     return;
                 }
-                if (lastRunBtn?.isNoBallExtras === true) {
-                    changeRuns(runs - (lastRunBtn.score + 1));
+                const currentLastBallObj = currentOverRunsView[currentOverRunsView.length - 1];
+                if (currentLastBallObj?.isNoBallExtras) {
+                    changeRuns(runs - currentLastBallObj.score - 1);
+                    currentOverRunsView.pop();
                     return;
-                };
-                if(lastRunBtn.name === 'wicket') {
-                    changeWicket(wickets-1);
+                }else if(currentLastBallObj?.name === 'wide_ball') {
+                    changeRuns(runs - currentLastBallObj.score);
+                    currentOverRunsView.pop();
+                    return;
+                }
+
+                const lastOverIndex = oversView.length - 1;
+                const lastOver = oversView[lastOverIndex];
+                const lastRunBtn = lastOver.pop();
+
+                oversView.pop();
+                if (lastRunBtn.name === 'wicket') {
+                    changeWicket(wickets - 1);
                 }
                 changeOver(currentOver - 1);
                 changeBall(5);
@@ -104,8 +128,8 @@ export default function CreateAppContext({ children }) {
                 return;
             }
             // check if its `wide` or `normal_ball` or `wicket_ball`
-            if(lastRunBtn.name === 'wicket') {
-                changeWicket(wickets-1);
+            if (lastRunBtn.name === 'wicket') {
+                changeWicket(wickets - 1);
             }
             changeBall(currentBall - 1);
             changeRuns(runs - lastRunBtn.score);
