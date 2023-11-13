@@ -3,7 +3,7 @@ import RunBtn from './bodyComponents/RunBtn';
 import OverViewComponent from './bodyComponents/OverViewComponet';
 import { firstRow, secondRow, thirdRow } from '../constants/scores';
 import { bodyStyles, runBtnStyles } from '../styles/bodyStyles';
-import { Image, ScrollView, TextInput, TouchableOpacity, View } from 'react-native';
+import { Image, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { AppContext } from '../store/AppContext';
 
 export default function Body() {
@@ -51,6 +51,16 @@ export default function Body() {
                         </View>
                     </TouchableOpacity>
                 </View>
+                <TouchableOpacity 
+                    style={bodyStyles.undoBtn}
+                    onPress={()=>{
+                        console.log('pressed undo btn');
+                    }}
+                >
+                    <Text style={bodyStyles.undoText} >
+                        UNDO
+                    </Text>
+                </TouchableOpacity>
             </View>
             <View style={bodyStyles.overViewContainer}>
                 <OverViewComponent currentOverRunsView={currentOverRunsView} />

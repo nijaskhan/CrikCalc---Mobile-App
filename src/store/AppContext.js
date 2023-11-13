@@ -35,7 +35,6 @@ export default function CreateAppContext({ children }) {
             newRunsObj.isNoBallExtras = true;
             changeCurrentOverRunsView([...currentOverRunsView, newRunsObj]);
             setNoBallStatus(false);
-            // runsObj.isNoBallExtras = false;
             return;
         }
         // till here - NoBall Logic
@@ -43,8 +42,6 @@ export default function CreateAppContext({ children }) {
             if (runsObj.name === 'wide_ball') {
                 changeRuns(runs + runsObj.score);
                 changeCurrentOverRunsView([...currentOverRunsView, runsObj]);
-                // changeBallLimit(ballLimit + 1);
-                // changeBall(currentBall - 1);
                 return;
             }
             changeRuns(runs + runsObj.score);
@@ -54,15 +51,10 @@ export default function CreateAppContext({ children }) {
             if (runsObj.name === 'wide_ball') {
                 changeRuns(runs + runsObj.score);
                 changeCurrentOverRunsView([...currentOverRunsView, runsObj]);
-                // changeBallLimit(ballLimit + 1);
-                // changeBall(currentBall - 1);
                 return;
             } else {
                 changeRuns(runs + runsObj.score);
-                // console.log('last ball: ' + runsObj.name);
-                // changeCurrentOverRunsView([...currentOverRunsView, runsObj]);
                 const updatedOverRunsView = [...currentOverRunsView, runsObj];
-                // console.log(currentOverRunsView, 'current over runs view', runsObj);
                 changeCurrentOversView([...oversView, updatedOverRunsView]);
                 changeOver(currentOver + 1);
                 changeBall(0);

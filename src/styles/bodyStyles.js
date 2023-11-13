@@ -9,9 +9,12 @@ export const bodyStyles = StyleSheet.create({
         alignItems: 'center',
     },
     textInputContainer: {
-        flex: 1,
+        // width: '80%', 
+        // flex: 1,
+        flexDirection: 'row',
         alignItems: 'center',
-        marginTop: 20
+        justifyContent: 'center',
+        // justifyContent: 'space-between'
     },
     flexColoumn: {
         flexDirection: 'row',
@@ -39,6 +42,19 @@ export const bodyStyles = StyleSheet.create({
         borderStyle: 'solid',
         padding: 5
     },
+    undoBtn: {
+        borderWidth: .5,
+        alignItems: 'center',
+        marginLeft: 16,
+        backgroundColor: '#bdc3c7',
+        borderRadius: 8
+    },
+    undoText: {
+        fontWeight: "500",
+        fontSize: 16,
+        padding: 8,
+        color: '#000000',
+    }
 })
 
 export const runBtnStyles = StyleSheet.create({
