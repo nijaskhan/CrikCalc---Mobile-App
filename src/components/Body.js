@@ -47,6 +47,7 @@ export default function Body() {
                         placeholder='score'
                         onChangeText={onChangeScore}
                         value={customScore}
+                        placeholderTextColor={'#000000'}
                     />
                     <TouchableOpacity onPress={handleCustomRunBTn}>
                         <View style={runBtnStyles.sendBtn} >
@@ -70,8 +71,8 @@ export default function Body() {
                 <View
                     style={{
                         borderRadius: 10,
-                        borderWidth: .5,
-                        borderColor: '#7f8c8d',
+                        borderWidth: 1,
+                        borderColor: '#591FFF',
                         padding: 3,
                         paddingVertical: 5,
                         marginBottom: 10,
@@ -83,6 +84,21 @@ export default function Body() {
                             changeCurrentBowler(value);
                         }}
                         defaultIndex={0}
+                        
+                        dropdownStyle={{
+                            margin: 5,
+                            color: '#000000',
+                        }}
+                        dropdownTextStyle={{
+                            marginBottom: 0,
+                            fontSize: 14,
+                            color: '#000000',
+                        }}
+                        dropdownTextHighlightStyle={{
+                            color: '#e74c3c'
+                        }}
+                        animated={true}
+                        isFullWidth={true}
                     >
                         <View style={{
                             paddingLeft: 10
@@ -104,7 +120,7 @@ export default function Body() {
                             key={`${index}`}
                             style={{
                                 borderRadius: 10,
-                                borderWidth: .5,
+                                borderWidth: 1,
                                 borderColor: '#7f8c8d',
                                 padding: 3,
                                 paddingVertical: 5,

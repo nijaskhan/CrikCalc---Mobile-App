@@ -23,9 +23,13 @@ export default function CreateAppContext({ children }) {
     const [bowlers, changeBowlers] = useState([
         'nijas khan',
         'achu',
-        'sasii',
-        'john doe',
-        'lambu'
+        'rahul Raju',
+        'rahul B',
+        'Anil',
+        'Varghese',
+        'abhi',
+        'Raj',
+        'sreeni'
     ]);
     const [currentBowler, changeCurrentBowler] = useState('');
 

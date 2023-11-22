@@ -5,7 +5,7 @@ export const bodyStyles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         marginHorizontal: 5,
-        marginTop: 30,
+        marginTop: 25,
         alignItems: 'center',
     },
     textInputContainer: {
@@ -14,7 +14,7 @@ export const bodyStyles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 8
+        marginTop: 5
         // justifyContent: 'space-between'
     },
     flexColoumn: {
@@ -30,7 +30,8 @@ export const bodyStyles = StyleSheet.create({
         borderColor: '#591FFF',
         borderRadius: 9,
         fontSize: 19,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: '#000000'
     },
     overViewContainer: {
         marginTop: 30,
@@ -44,17 +45,18 @@ export const bodyStyles = StyleSheet.create({
         padding: 5
     },
     undoBtn: {
-        borderWidth: .5,
+        borderWidth: 1,
         alignItems: 'center',
         marginLeft: 16,
         // backgroundColor: '#bdc3c7',
+        borderColor: '#591FFF',
         borderRadius: 8
     },
     undoText: {
         fontWeight: "500",
         fontSize: 16,
         padding: 8,
-        color: '#2c3e50',
+        color: '#000000',
     }
 })
 
@@ -62,7 +64,7 @@ export const runBtnStyles = StyleSheet.create({
     container: {
         display: 'flex',
         flexDirection: 'row',
-        marginBottom: 25,
+        marginBottom: 20,
     },
     border: {
         height: 80,
@@ -159,6 +161,7 @@ export const dropDownStyles = StyleSheet.create({
     optionsText: {
         fontSize: 15,
         padding: 2,
+        color: '#000000',
         fontWeight: 'bold',
         textTransform: 'uppercase',
     },
