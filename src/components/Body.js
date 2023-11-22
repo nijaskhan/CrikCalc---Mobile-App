@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import RunBtn from './bodyComponents/RunBtn';
 import OverViewComponent from './bodyComponents/OverViewComponet';
 import { firstRow, secondRow, thirdRow } from '../constants/scores';
-import { bodyStyles, runBtnStyles } from '../styles/bodyStyles';
+import { bodyStyles, dropDownStyles, runBtnStyles } from '../styles/bodyStyles';
 import { Image, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import ModalDropdown from 'react-native-modal-dropdown';
 import { AppContext } from '../store/AppContext';
@@ -69,12 +69,12 @@ export default function Body() {
             <View style={bodyStyles.overViewContainer}>
                 <View
                     style={{
-                        borderRadius: 4,
-                        borderWidth: 2,
+                        borderRadius: 10,
+                        borderWidth: .5,
                         borderColor: '#7f8c8d',
                         padding: 3,
                         paddingVertical: 5,
-                        marginBottom: 10
+                        marginBottom: 10,
                     }}
                 >
                     <ModalDropdown
@@ -82,10 +82,14 @@ export default function Body() {
                         onSelect={(index, value) => {
                             changeCurrentBowler(value);
                         }}
-                        defaultIndex={1}
+                        defaultIndex={0}
                     >
-                        <View>
-                            <Text>
+                        <View style={{
+                            paddingLeft: 10
+                        }}>
+                            <Text 
+                                style={dropDownStyles.optionsText}
+                            >
                                 {`${currentBowler}` || `Select Bowler`}
                             </Text>
                         </View>
@@ -99,16 +103,18 @@ export default function Body() {
                         <View
                             key={`${index}`}
                             style={{
-                                borderRadius: 4,
-                                borderWidth: 2,
+                                borderRadius: 10,
+                                borderWidth: .5,
                                 borderColor: '#7f8c8d',
                                 padding: 3,
                                 paddingVertical: 5,
                                 marginBottom: 10
                             }}
                         >
-                                <View>
-                                    <Text>
+                                <View style={{
+                                    paddingLeft: 10
+                                }}>
+                                    <Text style={dropDownStyles.optionsText} >
                                         {`${overObject.bowler}` || `Select Bowler`}
                                     </Text>
                                 </View>

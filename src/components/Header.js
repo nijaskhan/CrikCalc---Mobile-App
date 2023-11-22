@@ -14,7 +14,8 @@ const Header = () => {
         changeWicket,
         wickets,
         changeCurrentOversView,
-        changeCurrentOverRunsView
+        changeCurrentOverRunsView,
+        changeCurrentBowler
     } = useContext(AppContext);
 
     return (

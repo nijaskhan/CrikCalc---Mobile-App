@@ -154,3 +154,18 @@ export const runBtnStyles = StyleSheet.create({
         justifyContent: 'center',
     }
 });
+
+export const dropDownStyles = StyleSheet.create({
+    optionsText: {
+        fontSize: 15,
+        padding: 2,
+        fontWeight: 'bold',
+        textTransform: 'uppercase',
+    },
+    dropDownListContainer: {
+        width: '100%',
+        fontSize: 18,
+        padding: 5,
+        fontWeight: 'bold',
+    }
+});
