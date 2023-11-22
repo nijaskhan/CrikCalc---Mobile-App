@@ -125,18 +125,18 @@ export default function CreateAppContext({ children }) {
                 }
 
                 // bug workaround
-                console.log('overView : ', oversView);
+                // console.log('overView : ', oversView);
 
                 const lastOverIndex = oversView.length - 1;
-                console.log('oversviewlenght', lastOverIndex);
+                // console.log('oversviewlenght', lastOverIndex);
 
                 const lastOver = oversView[lastOverIndex];
-                console.log('lastOver', lastOver);
+                // console.log('lastOver', lastOver);
 
                 const lastRunBtn = lastOver.over.pop();
-                console.log('lastRunBtn', lastRunBtn);
+                // console.log('lastRunBtn', lastRunBtn);
 
-                console.log('oversview 2 :', oversView);
+                // console.log('oversview 2 :', oversView);
 
                 oversView.pop();
                 if (lastRunBtn.name === 'wicket') {
