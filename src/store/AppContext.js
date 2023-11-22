@@ -18,6 +18,17 @@ export default function CreateAppContext({ children }) {
 
     const [noBallStatus, setNoBallStatus] = useState(false);
 
+    // new changes to keep a track of bowlers
+
+    const [bowlers, changeBowlers] = useState([
+        'nijas khan',
+        'achu',
+        'sasii',
+        'john doe',
+        'lambu'
+    ]);
+    const [currentBowler, changeCurrentBowler] = useState('');
+
     const handleOver = (runsObj) => {
         runsObj.id = `item_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
         // console.log(runsObj);
@@ -55,12 +66,23 @@ export default function CreateAppContext({ children }) {
             } else {
                 changeRuns(runs + runsObj.score);
                 const updatedOverRunsView = [...currentOverRunsView, runsObj];
-                changeCurrentOversView([...oversView, updatedOverRunsView]);
+
+                // console.log('updated over runs view: ', updatedOverRunsView);
+                const completeOverWithBowler = {
+                    bowler: currentBowler,
+                    over: updatedOverRunsView
+                }
+                // console.log('complete over runs view: ', completeOverWithBowler);
+
+                changeCurrentOversView([...oversView, completeOverWithBowler]);
+                // console.log('oversView : ',oversView);
                 changeOver(currentOver + 1);
                 changeBall(0);
                 changeBallLimit(5);
                 // overs_reading
                 changeCurrentOverRunsView([]);
+                // clearing the bowler after the over
+                changeCurrentBowler('');
             }
         }
     }
@@ -156,7 +178,12 @@ export default function CreateAppContext({ children }) {
                 changeCurrentOversView,
                 noBallStatus,
                 setNoBallStatus,
-                handleUndoBtn
+                handleUndoBtn,
+                // new changes to keep track of bowlers
+                bowlers,
+                changeBowlers,
+                currentBowler,
+                changeCurrentBowler
             }}
         >
             {children}

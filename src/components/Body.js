@@ -1,10 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import RunBtn from './bodyComponents/RunBtn';
 import OverViewComponent from './bodyComponents/OverViewComponet';
 import { firstRow, secondRow, thirdRow } from '../constants/scores';
 import { bodyStyles, runBtnStyles } from '../styles/bodyStyles';
 import { Image, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import ModalDropdown from 'react-native-modal-dropdown';
 import { AppContext } from '../store/AppContext';
+import OverViewComponet from './bodyComponents/OverViewComponet';
 
 export default function Body() {
     const {
@@ -14,6 +16,9 @@ export default function Body() {
         currentOverRunsView,
         handleOver,
         handleUndoBtn,
+        bowlers,
+        currentBowler,
+        changeCurrentBowler
     } = useContext(AppContext);
 
     const handleCustomRunBTn = () => {
@@ -62,14 +67,52 @@ export default function Body() {
                 </TouchableOpacity>
             </View>
             <View style={bodyStyles.overViewContainer}>
-                <OverViewComponent currentOverRunsView={currentOverRunsView} />
+                <View
+                    style={{
+                        borderRadius: 4,
+                        borderWidth: 2,
+                        borderColor: '#7f8c8d',
+                        padding: 3,
+                        paddingVertical: 5,
+                        marginBottom: 10
+                    }}
+                >
+                    <ModalDropdown
+                        options={bowlers}
+                        onSelect={(index, value) => {
+                            changeCurrentBowler(value);
+                        }}
+                        defaultIndex={1}
+                    >
+                        <View>
+                            <Text>
+                                {`${currentBowler}` || `Select Bowler`}
+                            </Text>
+                        </View>
+                    </ModalDropdown>
+                    <OverViewComponent currentOverRunsView={currentOverRunsView} />
+                </View>
+
                 {
-                    oversView && oversView.slice().reverse().map((e, index) => (
+                    oversView &&
+                    oversView.slice().reverse().map((overObject, index) => (
                         <View
-                            style={bodyStyles.bottomLine}
-                            key={`${e.id}_${index}`}
+                            key={`${index}`}
+                            style={{
+                                borderRadius: 4,
+                                borderWidth: 2,
+                                borderColor: '#7f8c8d',
+                                padding: 3,
+                                paddingVertical: 5,
+                                marginBottom: 10
+                            }}
                         >
-                            <OverViewComponent currentOverRunsView={e} />
+                                <View>
+                                    <Text>
+                                        {`${overObject.bowler}` || `Select Bowler`}
+                                    </Text>
+                                </View>
+                            <OverViewComponet currentOverRunsView={overObject.over} />
                         </View>
                     ))
                 }

@@ -40,6 +40,7 @@ const Header = () => {
                             changeWicket(0);
                             changeCurrentOverRunsView([]);
                             changeCurrentOversView([]);
+                            changeCurrentBowler('');
                         }}
                     >
                         <Text style={headerStyles.resetText} >
