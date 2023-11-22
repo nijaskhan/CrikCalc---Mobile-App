@@ -1,17 +1,20 @@
 import React from 'react';
-import Header from './components/Header';
-import Body from './components/Body';
-import { SafeAreaView } from 'react-native';
-import { appStyles } from './styles/appStyles';
 import CreateAppContext from './store/AppContext';
+import HomePage from './pages/HomePage';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
 
 const App = () => {
     return (
         <CreateAppContext>
-            <SafeAreaView style={appStyles.container}>
-                <Header />
-                <Body />
-            </SafeAreaView>
+            <NavigationContainer>
+                <Stack.Navigator screenOptions={{headerShown: false}}>
+                    <Stack.Screen name='Home' component={HomePage} />
+                    {/* <HomePage /> */}
+                </Stack.Navigator>
+            </NavigationContainer>
         </CreateAppContext>
     );
 }
