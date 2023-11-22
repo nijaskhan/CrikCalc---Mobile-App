@@ -124,9 +124,19 @@ export default function CreateAppContext({ children }) {
                     return;
                 }
 
+                // bug workaround
+                console.log('overView : ', oversView);
+
                 const lastOverIndex = oversView.length - 1;
+                console.log('oversviewlenght', lastOverIndex);
+
                 const lastOver = oversView[lastOverIndex];
-                const lastRunBtn = lastOver.pop();
+                console.log('lastOver', lastOver);
+
+                const lastRunBtn = lastOver.over.pop();
+                console.log('lastRunBtn', lastRunBtn);
+
+                console.log('oversview 2 :', oversView);
 
                 oversView.pop();
                 if (lastRunBtn.name === 'wicket') {
@@ -135,7 +145,10 @@ export default function CreateAppContext({ children }) {
                 changeOver(currentOver - 1);
                 changeBall(5);
                 changeRuns(runs - lastRunBtn.score);
-                changeCurrentOverRunsView(lastOver);
+                changeCurrentBowler(lastOver?.bowler);
+                changeCurrentOverRunsView(lastOver?.over);
+
+                // Till here...
             }
         } else {
             // check if its `noBall`clg
