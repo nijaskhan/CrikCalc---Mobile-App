@@ -112,7 +112,6 @@ export default function Body() {
                     </ModalDropdown>
                     <OverViewComponent currentOverRunsView={currentOverRunsView} />
                 </View>
-
                 {
                     oversView &&
                     oversView.slice().reverse().map((overObject, index) => (
