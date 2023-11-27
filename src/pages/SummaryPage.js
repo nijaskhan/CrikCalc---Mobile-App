@@ -9,6 +9,7 @@ import { summaryStyles } from '../styles/summaryPageStyles';
 export default function SummaryPage() {
     return (
         <SafeAreaView style={appStyles.container}>
+        {/* header_Section */}
             <View style={headerStyles.container}>
                 <View style={summaryStyles.innerContainer}>
                     <View style={summaryStyles.textTitleContainer}>
@@ -30,6 +31,7 @@ export default function SummaryPage() {
                 </View>
             </View>
 
+            {/* Body_Section */}
             <ScrollView style={bodyStyles.mainContainer}>
 
             </ScrollView>
