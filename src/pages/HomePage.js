@@ -27,7 +27,7 @@ const HomePage = ({ navigation }) => {
                             onRequestClose={() => {
                                 // Alert.alert('Modal has been closed.');
                                 changeIsMatchFinished(!isMatchFinished);
-                                handleReset();
+                                // handleReset();
                             }}>
                             <View style={styles.centeredView}>
                                 <View style={styles.modalView}>
