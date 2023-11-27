@@ -10,6 +10,13 @@ export const headerStyles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    drawerBtnContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        paddingTop: 5,
+        paddingRight: 5
+    },
     textTitleContainer: {
         height: '80%',
         justifyContent: 'center',
@@ -22,11 +29,10 @@ export const headerStyles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     overTextTitle: {
-        color: '#D1D1D1',
+        color: '#ecf0f1',
         fontWeight: 'normal',
         fontSize: 16,
         letterSpacing: 1,
-        // justifyContent: 'flex-start'
     },
     resetText: {
         fontWeight: '500',
@@ -40,8 +46,9 @@ export const headerStyles = StyleSheet.create({
         fontSize: 15
     },
     textTitle: {
-        color: '#D1D1D1',
+        color: '#ecf0f1',
         fontSize: 15,
+        fontWeight: '500',
         letterSpacing: 2
     },
     textRuns: {

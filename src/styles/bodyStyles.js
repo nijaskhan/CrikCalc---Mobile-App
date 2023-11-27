@@ -8,6 +8,11 @@ export const bodyStyles = StyleSheet.create({
         marginTop: 25,
         alignItems: 'center',
     },
+    mainContainer: {
+        borderTopLeftRadius: 25,  
+        borderTopRightRadius: 25,
+        backgroundColor: '#ffffff'
+    },
     textInputContainer: {
         // width: '80%', 
         // flex: 1,

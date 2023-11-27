@@ -2,8 +2,9 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import React, { useContext } from 'react';
 import { headerStyles } from '../styles/headerStyles';
 import { AppContext } from '../store/AppContext';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-const Header = () => {
+const Header = ({navigation}) => {
     const {
         currentOver,
         currentBall,
@@ -20,6 +21,19 @@ const Header = () => {
 
     return (
         <View style={headerStyles.container}>
+            <View style={headerStyles.drawerBtnContainer}>
+                <Icon.Button
+                    name="bars"
+                    backgroundColor="#591FFF"
+                    onPress={() => navigation.navigate('SummaryPage')}
+                    size={25}
+                    iconStyle={{
+                        marginRight: 0,
+                        padding: 2,
+                    }}
+                >
+                </Icon.Button>
+            </View>
             <View style={headerStyles.innerContainer}>
                 <View style={headerStyles.textTitleContainer}>
                     <Text style={headerStyles.textTitle}>Total runs</Text>

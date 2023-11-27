@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import RunBtn from './bodyComponents/RunBtn';
 import OverViewComponent from './bodyComponents/OverViewComponet';
 import { firstRow, secondRow, thirdRow } from '../constants/scores';
@@ -32,7 +32,7 @@ export default function Body() {
     }
 
     return (
-        <ScrollView>
+        <ScrollView style={bodyStyles.mainContainer}>
             <View style={bodyStyles.container}>
                 <RunBtn runs={firstRow} />
                 <RunBtn runs={secondRow} />
