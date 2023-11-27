@@ -42,6 +42,29 @@ export const summaryStyles = StyleSheet.create({
         // flex: 1,
         alignItems: 'center',
         marginBottom: 4,
+    },
+    DatatableContainer: {
+        marginHorizontal: 16,
+        marginTop: 14
+    },
+    tableTitle: {
+        fontWeight: 'bold',
+        color: '#000000',
+        fontSize: 18,
+        margin: 4
+    },
+    tableFooterText: {
+        fontWeight: '500',
+        color: '#000000',
+        fontSize: 14,
+        margin: 4,
+        marginTop: 10
+    },
+    tableFooterText2: {
+        fontWeight: '500',
+        color: '#000000',
+        fontSize: 14,
+        margin: 4,
+        marginVertical: 10
     }
-
 }); 
