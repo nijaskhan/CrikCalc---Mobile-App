@@ -9,7 +9,7 @@ export const bodyStyles = StyleSheet.create({
         alignItems: 'center',
     },
     mainContainer: {
-        borderTopLeftRadius: 25,  
+        borderTopLeftRadius: 25,
         borderTopRightRadius: 25,
         backgroundColor: '#ffffff'
     },
@@ -176,4 +176,52 @@ export const dropDownStyles = StyleSheet.create({
         padding: 5,
         fontWeight: 'bold',
     }
+});
+
+export const homePageStyles = StyleSheet.create({
+    centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 22,
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        padding: 35,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+    button: {
+        borderRadius: 20,
+        padding: 10,
+        elevation: 2,
+    },
+    buttonOpen: {
+        backgroundColor: '#F194FF',
+    },
+    buttonClose: {
+        backgroundColor: '#591FFF',
+    },
+    textStyle: {
+        color: 'white',
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    modalText: {
+        marginBottom: 15,
+        textAlign: 'center',
+        fontSize: 16,
+        fontWeight: '500',
+        color: '#353b48'
+    },
+
 });

@@ -33,9 +33,34 @@ export default function CreateAppContext({ children }) {
     ]);
     const [currentBowler, changeCurrentBowler] = useState('');
 
+    // for match-summary page
+    const [totalOvers, changeTotalOvers] = useState(2);
+    const [teams, changeTeams] = useState(['Team1', 'Team2']);
+    const [currentTeam, changeCurrentTeam] = useState('Team1');
+
+    const [isMatchFinished, changeIsMatchFinished] = useState(false);
+
+    const handleReset = () => {
+        changeBall(0);
+        changeOver(0);
+        changeRuns(0);
+        changeWicket(0);
+        changeCurrentOverRunsView([]);
+        changeCurrentOversView([]);
+        changeCurrentBowler('');
+    }
+
     const handleOver = (runsObj) => {
-        runsObj.id = `item_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
         // console.log(runsObj);
+        // console.log('current over: ', currentOver);
+        // console.log('current ball: ', currentBall);
+        // console.log('isMatchFinished status ', isMatchFinished);
+
+        if (isMatchFinished) {
+            return;
+        }
+
+        runsObj.id = `item_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
         if (runsObj.name === 'wicket') {
             changeWicket(wickets + 1);
         }
@@ -89,6 +114,9 @@ export default function CreateAppContext({ children }) {
                 changeCurrentBowler('');
             }
         }
+        if (currentBall >= 5 && currentOver >= totalOvers - 1) {
+            changeIsMatchFinished(true);
+        }
     }
 
     const handleUndoBtn = () => {
@@ -122,7 +150,7 @@ export default function CreateAppContext({ children }) {
                     changeRuns(runs - currentLastBallObj.score - 1);
                     currentOverRunsView.pop();
                     return;
-                }else if(currentLastBallObj?.name === 'wide_ball') {
+                } else if (currentLastBallObj?.name === 'wide_ball') {
                     changeRuns(runs - currentLastBallObj.score);
                     currentOverRunsView.pop();
                     return;
@@ -200,7 +228,12 @@ export default function CreateAppContext({ children }) {
                 bowlers,
                 changeBowlers,
                 currentBowler,
-                changeCurrentBowler
+                changeCurrentBowler,
+                // match-summaryPage modification
+                isMatchFinished,
+                changeIsMatchFinished,
+                currentTeam,
+                handleReset
             }}
         >
             {children}

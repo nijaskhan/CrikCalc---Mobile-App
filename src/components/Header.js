@@ -1,23 +1,36 @@
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Text, TouchableOpacity, View } from 'react-native';
 import React, { useContext } from 'react';
 import { headerStyles } from '../styles/headerStyles';
 import { AppContext } from '../store/AppContext';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const Header = ({navigation}) => {
+const Header = ({ navigation }) => {
     const {
         currentOver,
         currentBall,
-        changeBall,
-        changeOver,
         runs,
-        changeRuns,
-        changeWicket,
         wickets,
-        changeCurrentOversView,
-        changeCurrentOverRunsView,
-        changeCurrentBowler
+        handleReset
     } = useContext(AppContext);
+
+    const showAlert = () => {
+        Alert.alert(
+            'Do you want to reset the game ?',
+            'If you reset the game the saved match history will lost',
+            [
+                {
+                    text: 'Cancel',
+                    onPress: () => console.log('cancel pressed'),
+                    style: 'cancel',
+                },
+                {
+                    text: 'OK',
+                    onPress: handleReset,
+                },
+            ],
+            { cancelable: false }
+        );
+    }
 
     return (
         <View style={headerStyles.container}>
@@ -48,15 +61,8 @@ const Header = ({navigation}) => {
                         </Text>
                     </Text>
                     <TouchableOpacity
-                        onPress={() => {
-                            changeBall(0);
-                            changeOver(0);
-                            changeRuns(0);
-                            changeWicket(0);
-                            changeCurrentOverRunsView([]);
-                            changeCurrentOversView([]);
-                            changeCurrentBowler('');
-                        }}
+                    // onPress={handleReset}
+                    onPress={showAlert}
                     >
                         <Text style={headerStyles.resetText} >
                             RESET
