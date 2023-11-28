@@ -45,6 +45,11 @@ export default function CreateAppContext({ children }) {
 
     const [isMatchFinished, changeIsMatchFinished] = useState(false);
 
+    const [matchData, setMatchData] = useState(null);
+
+    const [team1BowlerStats, setTeam1BowlerStats] = useState([]);
+    const [team2BowlerStats, setTeam2BowlerStats] = useState([]);
+
     const handleReset = () => {
         changeBall(0);
         changeOver(0);
@@ -56,10 +61,6 @@ export default function CreateAppContext({ children }) {
     }
 
     const handleOver = (runsObj) => {
-        // console.log(runsObj);
-        // console.log('current over: ', currentOver);
-        // console.log('current ball: ', currentBall);
-        // console.log('isMatchFinished status ', isMatchFinished);
 
         if (isMatchFinished) {
             return;
@@ -230,7 +231,7 @@ export default function CreateAppContext({ children }) {
             // console.log('first team match saved successfully');
             // changing the status of second batting
             changeIsSecondBatting(true);
-        }else{
+        } else {
             const team2 = {
                 team2: {
                     teamName: currentTeam,
@@ -243,6 +244,7 @@ export default function CreateAppContext({ children }) {
                 }
             }
             await mergeData(matchId, team2);
+            // add the fully match completed event here (on over ending only!!!)
         }
     }
 
@@ -251,6 +253,41 @@ export default function CreateAppContext({ children }) {
         const randomPart = Math.random().toString(36).substr(2, 5);
 
         return timestamp + randomPart;
+    }
+
+    // function to calculate bowler stats
+    function getbowlerStatistics(totalOverViews) {
+        const arrayObjects = [];
+        let bowlerName = '';
+
+        totalOverViews.forEach(stats => {
+            bowlerName = stats.bowler;
+            let overCount = 0;
+            let totalScore = 0;
+            let wicketStats = 0;
+
+            totalOverViews.forEach(overView => {
+                if (bowlerName === overView.bowler) {
+                    overCount += 1;
+
+                    totalScore += overView.over.reduce((accumulator, currentScore) => {
+                        return accumulator + currentScore.score;
+                    }, 0);
+
+                    wicketStats += overView.over.filter(score => score.name === 'wicket').length;
+                }
+            });
+
+            arrayObjects.push({
+                bowlerName: bowlerName,
+                oversCount: overCount,
+                totalScore: totalScore,
+                wickets: wicketStats
+            });
+        });
+
+        // console.log(arrayObjects);
+        return arrayObjects;
     }
 
     return (
@@ -286,7 +323,15 @@ export default function CreateAppContext({ children }) {
                 changeCurrentTeam,
                 handleReset,
                 teams,
-                saveMatch
+                saveMatch,
+                matchId,
+                matchData,
+                setMatchData,
+                getbowlerStatistics,
+                setTeam1BowlerStats,
+                team1BowlerStats,
+                setTeam2BowlerStats,
+                team2BowlerStats
             }}
         >
             {children}

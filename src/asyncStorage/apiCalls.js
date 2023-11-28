@@ -12,12 +12,24 @@ export const storeData = async (matchObj) => {
 export const mergeData = async (matchId, teamObj) => {
     try{
         await AsyncStorage.mergeItem(matchId, JSON.stringify(teamObj));
-
-        // let retrievedData = await AsyncStorage.getItem(matchId);
-        // retrievedData = JSON.parse(retrievedData);
-        // console.log(retrievedData, 'retrieved data');
     }catch (e) {
         console.log('error message', e.message);
         console.log(e);
     }
 };
+
+export const retrieveData = async (matchId) => {
+    try{
+        let data = await AsyncStorage.getItem(matchId);
+        data = JSON.parse(data);
+
+        if(data!==null){
+            return data;
+        }else{
+            return null;
+        }
+    }catch(e){
+        console.log('error message', e.message);
+        console.log(e);
+    }
+}

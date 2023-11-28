@@ -43,21 +43,21 @@ const HomePage = ({ navigation }) => {
                                     <Text
                                         style={styles.modalText}
                                     >
-                                        Over is Finished, {currentTeam} scored {runs} runs
+                                        Over is Finished, {currentTeam} scored {runs} runs, Go to Summary Page for more info
                                     </Text>
                                     <Pressable
                                         style={[styles.button, styles.buttonClose]}
                                         onPress={() => {
                                             saveMatch();
                                             changeIsMatchFinished(false);
-                                            navigation.navigate('SummaryPage');
+                                            // navigation.navigate('SummaryPage');
                                             changeTeam();
                                             handleReset();
                                         }}>
                                         <Text
                                             style={styles.textStyle}
                                         >
-                                            Go To Match Summary
+                                            Continue to Match
                                         </Text>
                                     </Pressable>
                                 </View>

@@ -45,7 +45,8 @@ export const summaryStyles = StyleSheet.create({
     },
     DatatableContainer: {
         marginHorizontal: 16,
-        marginTop: 14
+        marginTop: 14,
+        alignItems: 'center',
     },
     tableTitle: {
         fontWeight: 'bold',
