@@ -10,7 +10,8 @@ const Header = ({ navigation }) => {
         currentBall,
         runs,
         wickets,
-        handleReset
+        handleReset,
+        currentTeam
     } = useContext(AppContext);
 
     const showAlert = () => {
@@ -49,7 +50,7 @@ const Header = ({ navigation }) => {
             </View>
             <View style={headerStyles.innerContainer}>
                 <View style={headerStyles.textTitleContainer}>
-                    <Text style={headerStyles.textTitle}>Total runs</Text>
+                    <Text style={headerStyles.textTitle}>Total runs ({currentTeam})</Text>
                     <Text style={headerStyles.textRuns}>{runs} - {wickets}</Text>
                 </View>
                 <View style={headerStyles.overTextContainer}>

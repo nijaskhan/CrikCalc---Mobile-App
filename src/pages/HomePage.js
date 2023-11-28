@@ -12,8 +12,17 @@ const HomePage = ({ navigation }) => {
         changeIsMatchFinished,
         currentTeam,
         runs,
-        handleReset
+        handleReset,
+        teams,
+        changeCurrentTeam,
+        saveMatch
     } = useContext(AppContext);
+
+    const changeTeam = () => {
+        // const activeTeam = teams.filter(team => team !== currentTeam);
+        const activeTeam = teams.find(team => team !== currentTeam);
+        changeCurrentTeam(activeTeam);
+    }
 
     return (
         <>
@@ -21,7 +30,7 @@ const HomePage = ({ navigation }) => {
                 {
                     isMatchFinished && (
                         <Modal
-                            animationType = "slide"
+                            animationType="slide"
                             transparent={true}
                             visible={isMatchFinished}
                             onRequestClose={() => {
@@ -39,8 +48,10 @@ const HomePage = ({ navigation }) => {
                                     <Pressable
                                         style={[styles.button, styles.buttonClose]}
                                         onPress={() => {
-                                            changeIsMatchFinished(!isMatchFinished);
+                                            saveMatch();
+                                            changeIsMatchFinished(false);
                                             navigation.navigate('SummaryPage');
+                                            changeTeam();
                                             handleReset();
                                         }}>
                                         <Text

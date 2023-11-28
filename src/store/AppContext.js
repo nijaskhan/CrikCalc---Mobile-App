@@ -1,8 +1,11 @@
+import { mergeData, storeData } from "../asyncStorage/apiCalls";
+
 const { createContext, useState } = require("react");
 
 export const AppContext = createContext(null);
 
 export default function CreateAppContext({ children }) {
+    const [matchId, changeMatchId] = useState('');
     const [customScore, onChangeScore] = useState('');
     const [runs, changeRuns] = useState(0);
 
@@ -37,6 +40,8 @@ export default function CreateAppContext({ children }) {
     const [totalOvers, changeTotalOvers] = useState(2);
     const [teams, changeTeams] = useState(['Team1', 'Team2']);
     const [currentTeam, changeCurrentTeam] = useState('Team1');
+
+    const [isSecondBatting, changeIsSecondBatting] = useState(false);
 
     const [isMatchFinished, changeIsMatchFinished] = useState(false);
 
@@ -104,7 +109,7 @@ export default function CreateAppContext({ children }) {
                 // console.log('complete over runs view: ', completeOverWithBowler);
 
                 changeCurrentOversView([...oversView, completeOverWithBowler]);
-                // console.log('oversView : ',oversView);
+                // console.log('oversView : ', oversView);
                 changeOver(currentOver + 1);
                 changeBall(0);
                 changeBallLimit(5);
@@ -203,6 +208,51 @@ export default function CreateAppContext({ children }) {
         }
     }
 
+
+    const saveMatch = async () => {
+        if (!isSecondBatting) {
+            const generatedMatchId = generateUniqueID();
+            changeMatchId(generatedMatchId);
+            const matchObject = {
+                matchId: generatedMatchId,
+                totalOvers: totalOvers,
+                team1: {
+                    teamName: currentTeam,
+                    totalPlayers: bowlers.length,
+                    bowlers: bowlers,
+                    totalRuns: runs,
+                    overs: `${currentOver}.${currentBall}`,
+                    wickets: wickets,
+                    totalOverView: oversView
+                }
+            }
+            await storeData(matchObject);
+            // console.log('first team match saved successfully');
+            // changing the status of second batting
+            changeIsSecondBatting(true);
+        }else{
+            const team2 = {
+                team2: {
+                    teamName: currentTeam,
+                    totalPlayers: bowlers.length,
+                    bowlers: bowlers,
+                    totalRuns: runs,
+                    overs: `${currentOver}.${currentBall}`,
+                    wickets: wickets,
+                    totalOverView: oversView
+                }
+            }
+            await mergeData(matchId, team2);
+        }
+    }
+
+    function generateUniqueID() {
+        const timestamp = new Date().getTime().toString(36);
+        const randomPart = Math.random().toString(36).substr(2, 5);
+
+        return timestamp + randomPart;
+    }
+
     return (
         <AppContext.Provider
             value={{
@@ -233,7 +283,10 @@ export default function CreateAppContext({ children }) {
                 isMatchFinished,
                 changeIsMatchFinished,
                 currentTeam,
-                handleReset
+                changeCurrentTeam,
+                handleReset,
+                teams,
+                saveMatch
             }}
         >
             {children}
