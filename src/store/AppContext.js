@@ -1,4 +1,4 @@
-import { mergeData, storeData } from "../asyncStorage/apiCalls";
+import { mergeData, resetData, storeData } from "../asyncStorage/apiCalls";
 
 const { createContext, useState } = require("react");
 
@@ -58,6 +58,9 @@ export default function CreateAppContext({ children }) {
         changeCurrentOverRunsView([]);
         changeCurrentOversView([]);
         changeCurrentBowler('');
+        // resetting the current match with matchId
+        resetData(matchId);
+        changeCurrentTeam('team1');
     }
 
     const handleOver = (runsObj) => {
