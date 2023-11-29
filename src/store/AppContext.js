@@ -37,7 +37,7 @@ export default function CreateAppContext({ children }) {
     const [currentBowler, changeCurrentBowler] = useState('');
 
     // for match-summary page
-    const [totalOvers, changeTotalOvers] = useState(2);
+    const [totalOvers, changeTotalOvers] = useState('');
     const [teams, changeTeams] = useState(['Team1', 'Team2']);
     const [currentTeam, changeCurrentTeam] = useState('Team1');
 
@@ -60,7 +60,7 @@ export default function CreateAppContext({ children }) {
         changeCurrentBowler('');
         // resetting the current match with matchId
         resetData(matchId);
-        changeCurrentTeam('team1');
+        // changeCurrentTeam('team1');
     }
 
     const handleOver = (runsObj) => {
@@ -334,7 +334,9 @@ export default function CreateAppContext({ children }) {
                 setTeam1BowlerStats,
                 team1BowlerStats,
                 setTeam2BowlerStats,
-                team2BowlerStats
+                team2BowlerStats,
+                totalOvers,
+                changeTotalOvers,
             }}
         >
             {children}
