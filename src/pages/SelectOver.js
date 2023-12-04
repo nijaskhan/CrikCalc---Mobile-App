@@ -5,6 +5,7 @@ import HeaderComponent from '../components/Header/HeaderComponent';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { appStyles } from '../styles/appStyles';
 import { bodyStyles } from '../styles/bodyStyles';
+import Toast from 'react-native-toast-message';
 
 export default function SelectOver({ navigation }) {
 
@@ -14,10 +15,15 @@ export default function SelectOver({ navigation }) {
     } = useContext(AppContext);
 
     const handleSubmit = () => {
-        if (totalOvers !== 0) {
+        if (totalOvers !== 0 && totalOvers) {
             navigation.navigate('HomePage');
         } else {
-            Alert.alert('please enter a valid over')
+            Toast.show({
+                type: 'error',
+                text1: 'Input Error',
+                text2: 'over should not be empty !!!',
+                position: 'top'
+            });
         }
     }
 

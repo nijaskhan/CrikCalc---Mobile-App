@@ -1,3 +1,4 @@
+import Toast from "react-native-toast-message";
 import { mergeData, resetData, storeData } from "../asyncStorage/apiCalls";
 
 const { createContext, useState } = require("react");
@@ -76,6 +77,12 @@ export default function CreateAppContext({ children }) {
         // NoBall Logic
         if (runsObj.name === 'noBall') {
             setNoBallStatus(true);
+            Toast.show({
+                type: 'info',
+                text1: 'No Ball',
+                text2: 'No Ball Extra 1 run added',
+                visibilityTime: 2000
+            });
             changeRuns(runs + runsObj.score);
             return;
         } else if (noBallStatus === true) {
