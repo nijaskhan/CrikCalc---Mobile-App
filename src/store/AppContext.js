@@ -33,7 +33,8 @@ export default function CreateAppContext({ children }) {
         'Varghese',
         'abhi',
         'Raj',
-        'sreeni'
+        'sreeni',
+        'arshad'
     ]);
     const [currentBowler, changeCurrentBowler] = useState('');
 
@@ -80,7 +81,7 @@ export default function CreateAppContext({ children }) {
             Toast.show({
                 type: 'info',
                 text1: 'No Ball',
-                text2: 'No Ball Extra 1 run added',
+                text2: 'No Ball Extras added',
                 visibilityTime: 2000
             });
             changeRuns(runs + runsObj.score);

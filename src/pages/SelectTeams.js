@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { TextInput, StyleSheet, Text, View, Alert, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { TextInput, StyleSheet, Text, View, ScrollView, Image, TouchableOpacity, Vibration } from 'react-native';
 import { AppContext } from '../store/AppContext';
 import HeaderComponent from '../components/Header/HeaderComponent';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -15,6 +15,7 @@ export default function SelectOver({ navigation }) {
     } = useContext(AppContext);
 
     const handleSubmit = () => {
+        Vibration.vibrate();
         if (totalOvers !== 0 && totalOvers) {
             navigation.navigate('HomePage');
         } else {
