@@ -57,7 +57,7 @@ export default function CreateAppContext({ children }) {
     const [secondMatchScore, setSecondMatchScore] = useState({});
     const [wonTeam, setWonTeam] = useState('');
     const [fullMatchFinished, setFullMatchFinished] = useState(false);
-    const [runsDifference, setRunsDifference] = useState();
+    const [runsDifference, setRunsDifference] = useState('');
 
     const handleReset = () => {
         changeBall(0);
@@ -67,6 +67,23 @@ export default function CreateAppContext({ children }) {
         changeCurrentOverRunsView([]);
         changeCurrentOversView([]);
         changeCurrentBowler('');
+        // new...
+        changeTotalOvers('');
+        changeTeams([]);
+        changeCurrentTeam('');
+        changeIsSecondBatting(false);
+        changeIsMatchFinished(false);
+        setMatchData(null);
+        setTeam1BowlerStats([]);
+        setTeam2BowlerStats([]);
+        setFirstMatchScore({});
+        setSecondMatchScore({});
+        setWonTeam('');
+        setFullMatchFinished(false);
+        setRunsDifference('');
+        changeMatchId('');
+        onChangeScore('');
+        changeWicket(0);
         // resetting the current match with matchId
         resetData(matchId);
         // changeCurrentTeam('team1');

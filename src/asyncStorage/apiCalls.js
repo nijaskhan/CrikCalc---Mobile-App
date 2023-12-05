@@ -37,11 +37,9 @@ export const retrieveData = async (matchId) => {
 export const resetData = async (matchId) => {
     try{
         if(matchId){
-            const response = await AsyncStorage.removeItem(matchId);
-            console.log('response after the deletion: ', response);
+            await AsyncStorage.removeItem(matchId);
             return;
         }else{
-            console.log('no match id', matchId);
             return;
         }
     }catch (e) {
