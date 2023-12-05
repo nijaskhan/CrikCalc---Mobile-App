@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { Modal, Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import React, { useContext, useEffect } from 'react';
+import { Modal, Pressable, SafeAreaView, Text, View } from 'react-native';
 import { appStyles } from '../styles/appStyles';
 import Body from '../components/Body';
 import Header from '../components/Header';
@@ -12,17 +12,57 @@ const HomePage = ({ navigation }) => {
         changeIsMatchFinished,
         currentTeam,
         runs,
-        handleReset,
+        secondmatchReset,
         teams,
         changeCurrentTeam,
-        saveMatch
+        saveMatch,
+        isSecondBatting,
+        fullMatchFinished,
+        wonTeam,
+        firstMatchScore,
+        runsDifference,
+        setRunsDifference,
+        setWonTeam,
+        setFullMatchFinished
     } = useContext(AppContext);
 
     const changeTeam = () => {
-        // const activeTeam = teams.filter(team => team !== currentTeam);
-        const activeTeam = teams.find(team => team !== currentTeam);
-        changeCurrentTeam(activeTeam);
+        //const activeTeam = teams.filter(team => team !== currentTeam);
+        if (!isSecondBatting) {
+            const activeTeam = teams.find(team => team !== currentTeam);
+            changeIsMatchFinished(false);
+            changeCurrentTeam(activeTeam);
+        } else {
+            navigation.navigate('SummaryPage');
+        }
     }
+
+    useEffect(() => {
+        if(isSecondBatting&&isMatchFinished){
+            setFullMatchFinished(true);
+    
+            setRunsDifference(Math.abs(parseInt(firstMatchScore.totalRuns) - parseInt(runs)));
+    
+            if (firstMatchScore.totalRuns > runs) {
+                setWonTeam(firstMatchScore.teamName);
+            } else {
+                setWonTeam(currentTeam);
+            }
+        }
+    }, [isMatchFinished]);
+
+    useEffect(()=>{
+        if(firstMatchScore.teamName && isSecondBatting){
+            // console.log('match is goin on...');
+            if(firstMatchScore.totalRuns < runs) {
+                // console.log('second team won !!!');
+                changeIsMatchFinished(true);
+                setFullMatchFinished(true);
+                setRunsDifference(Math.abs(parseInt(firstMatchScore.totalRuns) - parseInt(runs)));
+                setWonTeam(currentTeam);
+            }
+        }
+    }, [runs]);
 
     return (
         <>
@@ -43,21 +83,27 @@ const HomePage = ({ navigation }) => {
                                     <Text
                                         style={styles.modalText}
                                     >
-                                        Over is Finished, {currentTeam} scored {runs} runs, Go to Summary Page for more info
+                                        {
+                                            fullMatchFinished ? `${wonTeam} won match by ${runsDifference} runs`
+                                                : `Over is Finished, ${currentTeam} scored ${runs} runs, Go to Summary Page for more info`
+                                        }
                                     </Text>
                                     <Pressable
                                         style={[styles.button, styles.buttonClose]}
                                         onPress={() => {
                                             saveMatch();
-                                            changeIsMatchFinished(false);
                                             // navigation.navigate('SummaryPage');
+                                            secondmatchReset();
                                             changeTeam();
-                                            handleReset();
                                         }}>
                                         <Text
                                             style={styles.textStyle}
                                         >
-                                            Continue to Match
+                                            {
+                                                isSecondBatting ?
+                                                    'Go to Summary' :
+                                                    'Continue to Match'
+                                            }
                                         </Text>
                                     </Pressable>
                                 </View>

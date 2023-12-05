@@ -1,5 +1,6 @@
 import Toast from "react-native-toast-message";
 import { mergeData, resetData, storeData } from "../asyncStorage/apiCalls";
+import { Vibration } from "react-native";
 
 const { createContext, useState } = require("react");
 
@@ -40,8 +41,8 @@ export default function CreateAppContext({ children }) {
 
     // for match-summary page
     const [totalOvers, changeTotalOvers] = useState('');
-    const [teams, changeTeams] = useState(['Team1', 'Team2']);
-    const [currentTeam, changeCurrentTeam] = useState('Team1');
+    const [teams, changeTeams] = useState([]);
+    const [currentTeam, changeCurrentTeam] = useState('');
 
     const [isSecondBatting, changeIsSecondBatting] = useState(false);
 
@@ -51,6 +52,12 @@ export default function CreateAppContext({ children }) {
 
     const [team1BowlerStats, setTeam1BowlerStats] = useState([]);
     const [team2BowlerStats, setTeam2BowlerStats] = useState([]);
+
+    const [firstMatchScore, setFirstMatchScore] = useState({});
+    const [secondMatchScore, setSecondMatchScore] = useState({});
+    const [wonTeam, setWonTeam] = useState('');
+    const [fullMatchFinished, setFullMatchFinished] = useState(false);
+    const [runsDifference, setRunsDifference] = useState();
 
     const handleReset = () => {
         changeBall(0);
@@ -65,9 +72,23 @@ export default function CreateAppContext({ children }) {
         // changeCurrentTeam('team1');
     }
 
+    const secondmatchReset = () => {
+        changeBall(0);
+        changeOver(0);
+        changeRuns(0);
+        changeWicket(0);
+        changeCurrentOverRunsView([]);
+        changeCurrentOversView([]);
+        changeCurrentBowler('');
+    }
+
     const handleOver = (runsObj) => {
 
         if (isMatchFinished) {
+            return;
+        }
+        if (currentOver >= totalOvers) {
+            changeIsMatchFinished(true);
             return;
         }
 
@@ -78,6 +99,7 @@ export default function CreateAppContext({ children }) {
         // NoBall Logic
         if (runsObj.name === 'noBall') {
             setNoBallStatus(true);
+            Vibration.vibrate();
             Toast.show({
                 type: 'info',
                 text1: 'No Ball',
@@ -225,6 +247,11 @@ export default function CreateAppContext({ children }) {
         if (!isSecondBatting) {
             const generatedMatchId = generateUniqueID();
             changeMatchId(generatedMatchId);
+            const updatedValue = {
+                teamName: currentTeam,
+                totalRuns: runs
+            };
+            setFirstMatchScore(updatedValue);
             const matchObject = {
                 matchId: generatedMatchId,
                 totalOvers: totalOvers,
@@ -243,6 +270,11 @@ export default function CreateAppContext({ children }) {
             // changing the status of second batting
             changeIsSecondBatting(true);
         } else {
+            const updatedValue = {
+                teamName: currentTeam,
+                totalRuns: runs
+            }
+            setSecondMatchScore(updatedValue);
             const team2 = {
                 team2: {
                     teamName: currentTeam,
@@ -254,8 +286,20 @@ export default function CreateAppContext({ children }) {
                     totalOverView: oversView
                 }
             }
+            // setRunsDifference(parseInt(firstMatchScore.totalRuns) - parseInt(updatedValue.runs));
+            // console.log(firstMatchScore, secondMatchScore, 'both matches scores');
+            // if(firstMatchScore.totalRuns>updatedValue.totalRuns){
+            //     console.log(firstMatchScore, 'won');
+            //     setWonTeam(firstMatchScore.teamName);
+            // }else{
+            //     console.log(updatedValue, 'second match won');
+            //     console.log(firstMatchScore, 'firstmatch won');
+            //     setWonTeam(updatedValue.teamName);
+            // }
             await mergeData(matchId, team2);
+            // changeIsMatchFinished(true);
             // add the fully match completed event here (on over ending only!!!)
+            // setFullMatchFinished(true);
         }
     }
 
@@ -345,6 +389,18 @@ export default function CreateAppContext({ children }) {
                 team2BowlerStats,
                 totalOvers,
                 changeTotalOvers,
+                changeTeams,
+                isSecondBatting,
+                secondmatchReset,
+                firstMatchScore,
+                secondMatchScore,
+                wonTeam,
+                fullMatchFinished,
+                setFullMatchFinished,
+                setRunsDifference,
+                runsDifference,
+                setRunsDifference,
+                setWonTeam
             }}
         >
             {children}

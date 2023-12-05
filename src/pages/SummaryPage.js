@@ -18,7 +18,9 @@ export default function SummaryPage({ navigation }) {
         setTeam1BowlerStats,
         team1BowlerStats,
         setTeam2BowlerStats,
-        team2BowlerStats
+        team2BowlerStats,
+        wonTeam,
+        runsDifference
     } = useContext(AppContext);
 
     async function getData(matchId) {
@@ -80,8 +82,11 @@ export default function SummaryPage({ navigation }) {
                         </View>
                     </View>
                     <View style={summaryStyles.infoTextContainer}>
-                        <Text style={summaryStyles.infoText}>Team 2 won by 8 runs</Text>
+                        { 
+                            wonTeam && <Text style={summaryStyles.infoText}>{wonTeam} won match by {runsDifference} runs</Text> 
+                        }
                     </View>
+
                 </View>
             </View>
 

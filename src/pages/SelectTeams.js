@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { TextInput, StyleSheet, Text, View, ScrollView, Image, TouchableOpacity, Vibration } from 'react-native';
 import { AppContext } from '../store/AppContext';
 import HeaderComponent from '../components/Header/HeaderComponent';
@@ -12,19 +12,38 @@ export default function SelectOver({ navigation }) {
     const {
         totalOvers,
         changeTotalOvers,
+        changeTeams,
+        teams,
+        changeCurrentTeam
     } = useContext(AppContext);
+
+    const [team1, setTeam1] = useState('');
+    const [team2, setTeam2] = useState('');
 
     const handleSubmit = () => {
         Vibration.vibrate();
         if (totalOvers !== 0 && totalOvers) {
-            navigation.navigate('HomePage');
+            if (team1&&team2) {
+                changeTeams([team1, team2]);
+                changeCurrentTeam(team1);
+                navigation.navigate('HomePage');
+            } else {
+                Toast.show({
+                    type: 'error',
+                    text1: 'All fields are required',
+                    text2: 'Teams name should not be empty !!!',
+                    position: 'top'
+                });
+                changeTeams([]);
+            }   
         } else {
             Toast.show({
                 type: 'error',
-                text1: 'Input Error',
-                text2: 'over should not be empty !!!',
+                text1: 'All fields are required',
+                text2: 'Over should not be empty !!!',
                 position: 'top'
             });
+            changeTeams([]);
         }
     }
 
@@ -37,6 +56,8 @@ export default function SelectOver({ navigation }) {
                         <TextInput
                             label="Team 1 name"
                             mode="outlined"
+                            value={team1}
+                            onChangeText={setTeam1}
                             style={styles.input}
                             placeholder="Enter team 1 name"
                             placeholderTextColor={'#2f3542'}
@@ -46,6 +67,8 @@ export default function SelectOver({ navigation }) {
                         <TextInput
                             label="Team 2 name"
                             mode="outlined"
+                            value={team2}
+                            onChangeText={setTeam2}
                             style={styles.input}
                             placeholder="Enter team 2 name"
                             placeholderTextColor={'#2f3542'}
