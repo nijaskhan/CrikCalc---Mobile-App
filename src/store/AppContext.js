@@ -266,8 +266,6 @@ export default function CreateAppContext({ children }) {
                 }
             }
             await storeData(matchObject);
-            // console.log('first team match saved successfully');
-            // changing the status of second batting
             changeIsSecondBatting(true);
         } else {
             const updatedValue = {
@@ -286,20 +284,7 @@ export default function CreateAppContext({ children }) {
                     totalOverView: oversView
                 }
             }
-            // setRunsDifference(parseInt(firstMatchScore.totalRuns) - parseInt(updatedValue.runs));
-            // console.log(firstMatchScore, secondMatchScore, 'both matches scores');
-            // if(firstMatchScore.totalRuns>updatedValue.totalRuns){
-            //     console.log(firstMatchScore, 'won');
-            //     setWonTeam(firstMatchScore.teamName);
-            // }else{
-            //     console.log(updatedValue, 'second match won');
-            //     console.log(firstMatchScore, 'firstmatch won');
-            //     setWonTeam(updatedValue.teamName);
-            // }
             await mergeData(matchId, team2);
-            // changeIsMatchFinished(true);
-            // add the fully match completed event here (on over ending only!!!)
-            // setFullMatchFinished(true);
         }
     }
 

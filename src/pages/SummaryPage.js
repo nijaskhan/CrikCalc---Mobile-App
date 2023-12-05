@@ -1,5 +1,5 @@
 import { Alert, ScrollView, Text, View } from 'react-native';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { headerStyles } from '../styles/headerStyles';
 import { appStyles } from '../styles/appStyles';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -20,7 +20,7 @@ export default function SummaryPage({ navigation }) {
         setTeam2BowlerStats,
         team2BowlerStats,
         wonTeam,
-        runsDifference
+        runsDifference,
     } = useContext(AppContext);
 
     async function getData(matchId) {
@@ -82,8 +82,8 @@ export default function SummaryPage({ navigation }) {
                         </View>
                     </View>
                     <View style={summaryStyles.infoTextContainer}>
-                        { 
-                            wonTeam && <Text style={summaryStyles.infoText}>{wonTeam} won match by {runsDifference} runs</Text> 
+                        {
+                            wonTeam && <Text style={summaryStyles.infoText}>{wonTeam} won match by {runsDifference} runs</Text>
                         }
                     </View>
 

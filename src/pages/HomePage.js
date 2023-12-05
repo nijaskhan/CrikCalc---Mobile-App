@@ -23,7 +23,7 @@ const HomePage = ({ navigation }) => {
         runsDifference,
         setRunsDifference,
         setWonTeam,
-        setFullMatchFinished
+        setFullMatchFinished,
     } = useContext(AppContext);
 
     const changeTeam = () => {
@@ -32,17 +32,21 @@ const HomePage = ({ navigation }) => {
             const activeTeam = teams.find(team => team !== currentTeam);
             changeIsMatchFinished(false);
             changeCurrentTeam(activeTeam);
+
+            secondmatchReset();
         } else {
+            // setExitSign(true);
+            // changeIsMatchFinished(true);
             navigation.navigate('SummaryPage');
         }
     }
 
     useEffect(() => {
-        if(isSecondBatting&&isMatchFinished){
+        if (isSecondBatting && isMatchFinished) {
             setFullMatchFinished(true);
-    
+
             setRunsDifference(Math.abs(parseInt(firstMatchScore.totalRuns) - parseInt(runs)));
-    
+
             if (firstMatchScore.totalRuns > runs) {
                 setWonTeam(firstMatchScore.teamName);
             } else {
@@ -51,10 +55,10 @@ const HomePage = ({ navigation }) => {
         }
     }, [isMatchFinished]);
 
-    useEffect(()=>{
-        if(firstMatchScore.teamName && isSecondBatting){
+    useEffect(() => {
+        if (firstMatchScore.teamName && isSecondBatting) {
             // console.log('match is goin on...');
-            if(firstMatchScore.totalRuns < runs) {
+            if (firstMatchScore.totalRuns < runs) {
                 // console.log('second team won !!!');
                 changeIsMatchFinished(true);
                 setFullMatchFinished(true);
@@ -74,9 +78,13 @@ const HomePage = ({ navigation }) => {
                             transparent={true}
                             visible={isMatchFinished}
                             onRequestClose={() => {
-                                // Alert.alert('Modal has been closed.');
-                                changeIsMatchFinished(!isMatchFinished);
-                                // handleReset();
+                                if (isSecondBatting) {
+                                    changeTeam();
+                                    saveMatch();
+                                    // secondmatchReset();
+                                } else {
+                                    changeIsMatchFinished(!isMatchFinished);
+                                }
                             }}>
                             <View style={styles.centeredView}>
                                 <View style={styles.modalView}>
@@ -93,7 +101,7 @@ const HomePage = ({ navigation }) => {
                                         onPress={() => {
                                             saveMatch();
                                             // navigation.navigate('SummaryPage');
-                                            secondmatchReset();
+                                            // secondmatchReset();
                                             changeTeam();
                                         }}>
                                         <Text
