@@ -26,7 +26,10 @@ const Header = ({ navigation }) => {
                 },
                 {
                     text: 'OK',
-                    onPress: handleReset,
+                    onPress: ()=>{
+                        handleReset();
+                        navigation.navigate('SelectOverPage');
+                    },
                 },
             ],
             { cancelable: false }
@@ -62,8 +65,7 @@ const Header = ({ navigation }) => {
                         </Text>
                     </Text>
                     <TouchableOpacity
-                    // onPress={handleReset}
-                    onPress={showAlert}
+                        onPress={showAlert}
                     >
                         <Text style={headerStyles.resetText} >
                             RESET
