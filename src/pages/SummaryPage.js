@@ -63,7 +63,7 @@ export default function SummaryPage({ navigation }) {
                         <View>
                             <Text
                                 style={summaryStyles.teamText}
-                            >{matchData?.team1?.teamName || 'not played'}</Text>
+                            >{matchData?.team1?.teamName?.substring(0, 10) + '...' || 'not played'}</Text>
                             <Text
                                 style={summaryStyles.scoreText}
                             >{matchData?.team1?.totalRuns || 0} - {matchData?.team1?.wickets || 0}
@@ -73,7 +73,7 @@ export default function SummaryPage({ navigation }) {
                             <Text
                                 style={summaryStyles.teamText}
                             >
-                                {matchData?.team2?.teamName || 'not played'}</Text>
+                                {matchData?.team2?.teamName ? matchData?.team2?.teamName?.substring(0, 10) + '...' : 'not played'}</Text>
                             <Text
                                 style={summaryStyles.scoreText}
                             >
