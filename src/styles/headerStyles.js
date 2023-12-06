@@ -48,8 +48,9 @@ export const headerStyles = StyleSheet.create({
     textTitle: {
         color: '#ecf0f1',
         fontSize: 15,
-        fontWeight: '500',
-        letterSpacing: 2
+        fontWeight: '600',
+        letterSpacing: 2,
+        marginTop: 10
     },
     textRuns: {
         fontWeight: 'bold',

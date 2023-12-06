@@ -10,39 +10,54 @@ export const storeData = async (matchObj) => {
 };
 
 export const mergeData = async (matchId, teamObj) => {
-    try{
+    try {
         await AsyncStorage.mergeItem(matchId, JSON.stringify(teamObj));
-    }catch (e) {
+    } catch (e) {
         console.log('error message', e.message);
         console.log(e);
     }
 };
 
 export const retrieveData = async (matchId) => {
-    try{
+    try {
         let data = await AsyncStorage.getItem(matchId);
         data = JSON.parse(data);
 
-        if(data!==null){
+        if (data !== null) {
             return data;
-        }else{
+        } else {
             return null;
         }
-    }catch(e){
+    } catch (e) {
         console.log('error message', e.message);
         console.log(e);
     }
 }
 
 export const resetData = async (matchId) => {
-    try{
-        if(matchId){
+    try {
+        if (matchId) {
             await AsyncStorage.removeItem(matchId);
             return;
-        }else{
+        } else {
             return;
         }
-    }catch (e) {
+    } catch (e) {
+        console.log('error message', e.message);
+        console.log(e);
+    }
+}
+
+export const getAllDatas = async () => {
+    try{
+        const allKeys = await AsyncStorage.getAllKeys();
+        // console.log('all keys', allKeys);
+        let allData = await AsyncStorage.multiGet(allKeys);
+        // console.log('all datas');
+        const parsedData = allData.map(([id, jsonString]) => [id, JSON.parse(jsonString)]);
+        // console.log(parsedData);
+        return parsedData;
+    }catch(e){
         console.log('error message', e.message);
         console.log(e);
     }

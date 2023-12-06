@@ -303,7 +303,9 @@ export default function CreateAppContext({ children }) {
                     overs: `${currentOver}.${currentBall}`,
                     wickets: wickets,
                     totalOverView: oversView
-                }
+                },
+                wonTeam: wonTeam,
+                runsDifference: runsDifference
             }
             await mergeData(matchId, team2);
         }
