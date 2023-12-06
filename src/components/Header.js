@@ -28,7 +28,7 @@ const Header = ({ navigation }) => {
                     text: 'OK',
                     onPress: ()=>{
                         handleReset();
-                        navigation.navigate('SelectOverPage');
+                        navigation.navigate('landingPage');
                     },
                 },
             ],

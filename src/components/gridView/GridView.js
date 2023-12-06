@@ -34,7 +34,7 @@ export default function GridView({matchId, team1, team2, wonTeam, runsDifference
                     marginVertical: 3,
                     color: '#000000'
                 }} >
-                    Iron Man won by 8 runs
+                    {wonTeam && `${wonTeam} won by ${runsDifference} runs`}
                 </Text>
             </View>
         </View>

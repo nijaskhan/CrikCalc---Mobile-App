@@ -39,7 +39,8 @@ export default function CreateAppContext({ children }) {
         'riyas',
         'alwin',
         'george',
-        'nijas m'
+        'nijas m',
+        'hari'
     ]);
     const [currentBowler, changeCurrentBowler] = useState('');
 
@@ -89,7 +90,7 @@ export default function CreateAppContext({ children }) {
         onChangeScore('');
         changeWicket(0);
         // resetting the current match with matchId
-        resetData(matchId);
+        // resetData(matchId);
         // changeCurrentTeam('team1');
     }
 

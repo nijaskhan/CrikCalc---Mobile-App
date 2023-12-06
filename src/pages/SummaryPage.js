@@ -64,7 +64,7 @@ export default function SummaryPage({ navigation }) {
                             <Text
                                 style={summaryStyles.teamText}
                             >{
-                                matchData?.team1?.teamName?.length > 9 
+                                matchData?.team1?.teamName?.length > 11
                                 ? matchData?.team1?.teamName?.substring(0, 10) + '...' || 'not played'
                                 : matchData?.team1?.teamName || 'not played'
                             }</Text>
@@ -78,7 +78,7 @@ export default function SummaryPage({ navigation }) {
                                 style={summaryStyles.teamText}
                             >
                             {
-                                matchData?.team2?.teamName?.length > 9 
+                                matchData?.team2?.teamName?.length > 11 
                                 ? matchData?.team2?.teamName?.substring(0, 10) + '...' || 'not played'
                                 : matchData?.team2?.teamName || 'not played'
                             }</Text>
@@ -129,7 +129,7 @@ export default function SummaryPage({ navigation }) {
                             style={summaryStyles.tableFooterText}
                         >
                             {
-                                matchData?.team1?.teamName} Total Runs: {matchData?.team1?.totalRuns || 0}  ( {matchData?.team1?.wickets || 0} wkts, {matchData?.team1?.overs || 0} overs )
+                                matchData?.team2?.teamName} Total Runs: {matchData?.team2?.totalRuns || 0}  ( {matchData?.team2?.wickets || 0} wkts, {matchData?.team2?.overs || 0} overs )
                         </Text>
 
                     </DataTable>
@@ -167,7 +167,7 @@ export default function SummaryPage({ navigation }) {
                                 <Text
                                     style={summaryStyles.tableFooterText2}
                                 >
-                                    {matchData?.team2?.teamName} Total Runs: {matchData?.team2?.totalRuns || 0}  ( {matchData?.team2?.wickets || 0} wkts, {matchData?.team2?.overs || 0} overs )
+                                    {matchData?.team1?.teamName} Total Runs: {matchData?.team1?.totalRuns || 0}  ( {matchData?.team1?.wickets || 0} wkts, {matchData?.team1?.overs || 0} overs )
                                 </Text>
 
                             </DataTable>) : (

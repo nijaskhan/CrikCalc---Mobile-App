@@ -53,7 +53,7 @@ export const getAllDatas = async () => {
         const allKeys = await AsyncStorage.getAllKeys();
         // console.log('all keys', allKeys);
         let allData = await AsyncStorage.multiGet(allKeys);
-        // console.log('all datas');
+        // console.log('all datas', allData);
         const parsedData = allData.map(([id, jsonString]) => [id, JSON.parse(jsonString)]);
         // console.log(parsedData);
         return parsedData;

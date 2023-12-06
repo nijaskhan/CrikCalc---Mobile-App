@@ -4,16 +4,22 @@ import {
     Image,
     View,
     TouchableOpacity,
-    SafeAreaView
+    SafeAreaView,
+    Text
 } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { appStyles } from '../styles/appStyles';
 import { bodyStyles } from '../styles/bodyStyles';
 import HeaderComponent from '../components/Header/HeaderComponent';
 import GridView from '../components/gridView/GridView';
 import { getAllDatas } from '../asyncStorage/apiCalls';
+import { AppContext } from '../store/AppContext';
+import { useFocusEffect } from '@react-navigation/native';
 
-export default function LandingPage() {
+export default function LandingPage({ navigation }) {
+    const {
+        saveMatch
+    } = useContext(AppContext);
     const [histories, setHistories] = useState();
 
     const getHistory = async () => {
@@ -22,33 +28,52 @@ export default function LandingPage() {
         setHistories(data);
     }
 
-    useEffect(() => {
-        getHistory();
-    }, []);
+    useFocusEffect(
+        React.useCallback(() => {
+            getHistory();
+        }, [])
+    );
+
+    // useEffect(() => {
+    //     getHistory();
+    // }, [saveMatch]);
 
     return (
         <SafeAreaView style={appStyles.container}>
-            <HeaderComponent heading={'Welcome'} subheading={'Click next to start a New Match'} />
+            <HeaderComponent heading={'Welcome,'} subheading={'Click next to start a New Match'} />
             <ScrollView style={bodyStyles.mainContainer}>
                 <View style={{
                     marginTop: 20
                 }}>
                     {
-                        histories && histories.map((history) => (
-                            <GridView 
+                        histories?.length > 0 ? histories.map((history) => (
+                            <GridView
+                                key={history[1]?.matchId}
                                 matchId={history[1]?.matchId}
                                 team1={history[1]?.team1?.teamName}
                                 team2={history[1]?.team2?.teamName}
                                 wonTeam={history[1]?.wonTeam}
                                 runsDifference={history[1]?.runsDifference}
                             />
-                        ))
+                        )) : (
+                            <View style={{
+                                flex: 1,
+                                alignItems: 'center',
+                                marginTop: 50
+                            }}>
+                                <Text style={{
+                                    fontSize: 24,
+                                    fontWeight: 'bold'
+                                }}>No History to show</Text>
+                            </View>
+                        )
                     }
-                    <GridView />
                 </View>
             </ScrollView>
             <TouchableOpacity
-                onPress={() => console.log('clicked me')}
+                onPress={() => {
+                    navigation.navigate('SelectOverPage')
+                }}
                 style={styles.floatingButton}
             >
                 <Image
