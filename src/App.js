@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomePage from './pages/HomePage';
 import SummaryPage from './pages/SummaryPage';
 import SelectTeams from './pages/SelectTeams';
+import TossSelectPage from './pages/TossSelectPage';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +17,7 @@ const App = () => {
                 <NavigationContainer>
                     <Stack.Navigator screenOptions={{ headerShown: false }}>
                         <Stack.Screen name='SelectOverPage' component={SelectTeams} />
+                        <Stack.Screen name='SelectBattingTeam' component={TossSelectPage} />
                         <Stack.Screen name='HomePage' component={HomePage} />
                         <Stack.Screen name='SummaryPage' component={SummaryPage} />
                     </Stack.Navigator>

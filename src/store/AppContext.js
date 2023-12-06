@@ -30,12 +30,16 @@ export default function CreateAppContext({ children }) {
         'achu',
         'rahul Raju',
         'rahul B',
-        'Anil',
-        'Varghese',
+        'anil',
+        'varghese',
         'abhi',
         'Raj',
         'sreeni',
-        'arshad'
+        'arshad',
+        'riyas',
+        'alwin',
+        'george',
+        'nijas m'
     ]);
     const [currentBowler, changeCurrentBowler] = useState('');
 

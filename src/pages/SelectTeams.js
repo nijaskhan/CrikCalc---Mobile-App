@@ -12,9 +12,7 @@ export default function SelectOver({ navigation }) {
     const {
         totalOvers,
         changeTotalOvers,
-        changeTeams,
-        teams,
-        changeCurrentTeam
+        changeTeams
     } = useContext(AppContext);
 
     const [team1, setTeam1] = useState('');
@@ -25,8 +23,7 @@ export default function SelectOver({ navigation }) {
         if (totalOvers !== 0 && totalOvers) {
             if (team1&&team2) {
                 changeTeams([team1, team2]);
-                changeCurrentTeam(team1);
-                navigation.navigate('HomePage');
+                navigation.navigate('SelectBattingTeam');
             } else {
                 Toast.show({
                     type: 'error',
