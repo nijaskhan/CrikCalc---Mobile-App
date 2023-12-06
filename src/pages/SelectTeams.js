@@ -82,7 +82,7 @@ export default function SelectOver({ navigation }) {
                             placeholderTextColor={'#2f3542'}
                             keyboardType="numeric"
                         />
-                        <Text style={styles.hintText}>Leave the overs blank If you are not sure</Text>
+                        <Text style={styles.hintText}>Dont leave the fields blank, All fields are required</Text>
                     </View>
                     <TouchableOpacity onPress={handleSubmit}>
                         <View style={styles.container} >
