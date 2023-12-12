@@ -8,6 +8,7 @@ import SummaryPage from './pages/SummaryPage';
 import SelectTeams from './pages/SelectTeams';
 import TossSelectPage from './pages/TossSelectPage';
 import LandingPage from './pages/LandingPage';
+import HistorySummary from './pages/HistorySummary';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +19,7 @@ const App = () => {
                 <NavigationContainer>
                     <Stack.Navigator screenOptions={{ headerShown: false }}>
                         <Stack.Screen name='landingPage' component={LandingPage} />
+                        <Stack.Screen name='HistorySummaryPage' component={HistorySummary} />
                         <Stack.Screen name='SelectOverPage' component={SelectTeams} />
                         <Stack.Screen name='SelectBattingTeam' component={TossSelectPage} />
                         <Stack.Screen name='HomePage' component={HomePage} />

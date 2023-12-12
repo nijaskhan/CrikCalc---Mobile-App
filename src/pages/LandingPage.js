@@ -7,24 +7,21 @@ import {
     SafeAreaView,
     Text
 } from 'react-native';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { appStyles } from '../styles/appStyles';
 import { bodyStyles } from '../styles/bodyStyles';
 import HeaderComponent from '../components/Header/HeaderComponent';
 import GridView from '../components/gridView/GridView';
 import { getAllDatas } from '../asyncStorage/apiCalls';
-import { AppContext } from '../store/AppContext';
 import { useFocusEffect } from '@react-navigation/native';
 
 export default function LandingPage({ navigation }) {
-    const {
-        saveMatch
-    } = useContext(AppContext);
+
     const [histories, setHistories] = useState();
 
     const getHistory = async () => {
         const data = await getAllDatas();
-        console.log(data);
+        // console.log(data);
         setHistories(data);
     }
 
@@ -34,27 +31,32 @@ export default function LandingPage({ navigation }) {
         }, [])
     );
 
-    // useEffect(() => {
-    //     getHistory();
-    // }, [saveMatch]);
+    const handleSelect = (matchId) => {
+        // console.log('matchId: ', matchId);
+        navigation.navigate('HistorySummaryPage', { matchId: matchId });
+    };
 
     return (
         <SafeAreaView style={appStyles.container}>
-            <HeaderComponent heading={'Welcome,'} subheading={'Click next to start a New Match'} />
+            <HeaderComponent
+                heading={'Welcome,'}
+                subheading={'Click next to start a New Match'}
+            />
             <ScrollView style={bodyStyles.mainContainer}>
                 <View style={{
                     marginTop: 20
                 }}>
                     {
                         histories?.length > 0 ? histories.map((history) => (
-                            <GridView
-                                key={history[1]?.matchId}
-                                matchId={history[1]?.matchId}
-                                team1={history[1]?.team1?.teamName}
-                                team2={history[1]?.team2?.teamName}
-                                wonTeam={history[1]?.wonTeam}
-                                runsDifference={history[1]?.runsDifference}
-                            />
+                            <TouchableOpacity key={history[1]?.matchId} onPress={() => handleSelect(history[1]?.matchId)}>
+                                <GridView
+                                    matchId={history[1]?.matchId}
+                                    team1={history[1]?.team1?.teamName}
+                                    team2={history[1]?.team2?.teamName}
+                                    wonTeam={history[1]?.wonTeam}
+                                    runsDifference={history[1]?.runsDifference}
+                                />
+                            </TouchableOpacity>
                         )) : (
                             <View style={{
                                 flex: 1,
