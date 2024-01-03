@@ -26,21 +26,21 @@ export default function CreateAppContext({ children }) {
     // new changes to keep a track of bowlers
 
     const [bowlers, changeBowlers] = useState([
-        'nijas khan',
-        'achu',
-        'rahul Raju',
-        'rahul B',
-        'anil',
-        'varghese',
-        'abhi',
+        'Achuz',
+        'Abhi',
+        'Alwin',
+        'Anil',
+        'Arshad',
+        'George',
+        'Hari',
+        'Nijas khan',
+        'Nijas m',
+        'Rahul Raju',
+        'Rahul B',
         'Raj',
-        'sreeni',
-        'arshad',
-        'riyas',
-        'alwin',
-        'george',
-        'nijas m',
-        'hari'
+        'Riyas',
+        'Sreeni',
+        'Varghese',
     ]);
     const [currentBowler, changeCurrentBowler] = useState('');
 
