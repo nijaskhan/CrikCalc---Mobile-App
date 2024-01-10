@@ -24,6 +24,7 @@ const HomePage = ({ navigation }) => {
         setRunsDifference,
         setWonTeam,
         setFullMatchFinished,
+        saveLastOver
     } = useContext(AppContext);
 
     const changeTeam = () => {
@@ -60,6 +61,7 @@ const HomePage = ({ navigation }) => {
             // console.log('match is goin on...');
             if (firstMatchScore.totalRuns < runs) {
                 // console.log('second team won !!!');
+                saveLastOver();
                 changeIsMatchFinished(true);
                 setFullMatchFinished(true);
                 setRunsDifference(Math.abs(parseInt(firstMatchScore.totalRuns) - parseInt(runs)));

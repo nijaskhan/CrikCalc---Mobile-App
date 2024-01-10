@@ -29,6 +29,7 @@ export default function HistorySummary({ navigation }) {
         // console.log('raw data: ', data);
 
         if (data) {
+            // console.log('rawDta: ', data);
             setMatchData(data);
 
             const rawStats = getbowlerStatistics(data.team1?.totalOverView);
@@ -37,9 +38,10 @@ export default function HistorySummary({ navigation }) {
             setTeam1BowlerStats(stats);
 
             if (data?.team2) {
+                // console.log('raw totalOvers View : ', data.team2?.totalOverView)
                 const rawStats2 = getbowlerStatistics(data.team2?.totalOverView);
                 const stats2 = await makeBowlerNamesUnique(rawStats2);
-                // console.log("stats: ", stats);
+                // console.log("stats2: ", stats2);
                 setTeam2BowlerStats(stats2);
             }
 

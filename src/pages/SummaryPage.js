@@ -129,7 +129,7 @@ export default function SummaryPage({ navigation }) {
 
             <ScrollView style={bodyStyles.mainContainer}>
                 <View style={summaryStyles.DatatableContainer}>
-                    <Text style={summaryStyles.tableTitle}>{matchData?.team2?.teamName} bowling stats</Text>
+                    <Text style={summaryStyles.tableTitle}>{matchData?.team2?.teamName || `Team 1`} bowling stats</Text>
                     <DataTable>
                         <DataTable.Header>
                             <DataTable.Title>Bowler</DataTable.Title>
@@ -166,7 +166,7 @@ export default function SummaryPage({ navigation }) {
                     <Text
                         style={summaryStyles.tableTitle}
                     >
-                        {team2BowlerStats.length != 0 ? `${matchData?.team1?.teamName} bowling stats` : `Team 2 STILL PLAYING`}
+                        {team2BowlerStats.length != 0 ? `${matchData?.team1?.teamName || `Team 2`} bowling stats` : `Team 2 STILL PLAYING`}
                     </Text>
                     {
                         team2BowlerStats.length != 0 ?
