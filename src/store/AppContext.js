@@ -369,7 +369,7 @@ export default function CreateAppContext({ children }) {
                 if (bowlerName === overView.bowler) {
                     // overCount += 1;
                     // modifies the oversCount to show balls with overcount
-                    if (overView.over.length === 6) {
+                    if (overView.over.length >= 6) {
                         overCount += 1;
                     } else {
                         const balls = overView.over.length;
