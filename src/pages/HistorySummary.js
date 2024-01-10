@@ -26,16 +26,20 @@ export default function HistorySummary({ navigation }) {
 
     async function getData(matchId) {
         const data = await retrieveData(matchId);
-        // console.log(data, 'rawDta');
+        // console.log('raw data: ', data);
 
         if (data) {
             setMatchData(data);
 
-            const stats = getbowlerStatistics(data.team1.totalOverView);
+            const rawStats = getbowlerStatistics(data.team1?.totalOverView);
+            const stats = await makeBowlerNamesUnique(rawStats);
+            // console.log("stats: ", stats);
             setTeam1BowlerStats(stats);
 
             if (data?.team2) {
-                const stats2 = getbowlerStatistics(data.team2?.totalOverView);
+                const rawStats2 = getbowlerStatistics(data.team2?.totalOverView);
+                const stats2 = await makeBowlerNamesUnique(rawStats2);
+                // console.log("stats: ", stats);
                 setTeam2BowlerStats(stats2);
             }
 
@@ -46,6 +50,29 @@ export default function HistorySummary({ navigation }) {
             );
             navigation.navigate('HomePage');
         }
+    }
+
+    async function makeBowlerNamesUnique(bowlerStats) {
+        const uniqueBowlerStats = bowlerStats.reduce((uniqueStats, currentStat) => {
+            const existingIndex = uniqueStats.findIndex(stat => stat.bowlerName === currentStat.bowlerName);
+
+            if (existingIndex !== -1) {
+                // If bowlerName already exists, update the statistics
+                uniqueStats[existingIndex] = {
+                    ...uniqueStats[existingIndex],
+                    oversCount: uniqueStats[existingIndex].oversCount,
+                    totalScore: uniqueStats[existingIndex].totalScore,
+                    wickets: uniqueStats[existingIndex].wickets
+                };
+            } else {
+                // If bowlerName doesn't exist, add a new entry
+                uniqueStats.push({ ...currentStat });
+            }
+
+            return uniqueStats;
+        }, []);
+
+        return uniqueBowlerStats;
     }
 
     useEffect(() => {
@@ -103,7 +130,7 @@ export default function HistorySummary({ navigation }) {
 
             <ScrollView style={bodyStyles.mainContainer}>
                 <View style={summaryStyles.DatatableContainer}>
-                    <Text style={summaryStyles.tableTitle}>Team 1 bowling stats</Text>
+                    <Text style={summaryStyles.tableTitle}>{matchData?.team2?.teamName} bowling stats</Text>
                     <DataTable>
                         <DataTable.Header>
                             <DataTable.Title>Bowler</DataTable.Title>
@@ -140,7 +167,7 @@ export default function HistorySummary({ navigation }) {
                     <Text
                         style={summaryStyles.tableTitle}
                     >
-                        {team2BowlerStats.length != 0 ? `Team 2 bowling stats` : `Team 2 STILL PLAYING`}
+                        {team2BowlerStats.length != 0 ? `${matchData?.team1?.teamName} bowling stats` : `Team 2 STILL PLAYING`}
                     </Text>
                     {
                         team2BowlerStats.length != 0 ?
