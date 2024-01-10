@@ -81,8 +81,8 @@ const HomePage = ({ navigation }) => {
                             visible={isMatchFinished}
                             onRequestClose={() => {
                                 if (isSecondBatting) {
-                                    changeTeam();
                                     saveMatch();
+                                    changeTeam();
                                     // secondmatchReset();
                                 } else {
                                     changeIsMatchFinished(!isMatchFinished);

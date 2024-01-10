@@ -274,9 +274,30 @@ export default function CreateAppContext({ children }) {
             bowler: currentBowler,
             over: currentOverRunsView
         }
-        // console.log('complete over runs view: ', completeOverWithBowler);
+        console.log('complete over runs view: ', completeOverWithBowler);
 
         changeCurrentOversView([...oversView, completeOverWithBowler]);
+
+        console.log("oversview : ", oversView)
+        return;
+    }
+
+    // endMatch-btn
+    const endMatch = async () => {
+        if (!isSecondBatting) {
+            // saving the match
+            // await saveMatch();
+
+            // const activeTeam = teams.find(team => team !== currentTeam);
+            changeIsMatchFinished(true);
+            // changeCurrentTeam(activeTeam);
+
+            // secondmatchReset();
+        } else {
+            // saving the match
+            // await saveMatch();
+            changeIsMatchFinished(true);
+        }
     }
 
     const saveMatch = async () => {
@@ -348,9 +369,9 @@ export default function CreateAppContext({ children }) {
                 if (bowlerName === overView.bowler) {
                     // overCount += 1;
                     // modifies the oversCount to show balls with overcount
-                    if(overView.over.length===6){
+                    if (overView.over.length === 6) {
                         overCount += 1;
-                    }else{
+                    } else {
                         const balls = overView.over.length;
                         overCount += balls / 10;
                     }
@@ -431,7 +452,8 @@ export default function CreateAppContext({ children }) {
                 runsDifference,
                 setRunsDifference,
                 setWonTeam,
-                saveLastOver
+                saveLastOver,
+                endMatch
             }}
         >
             {children}

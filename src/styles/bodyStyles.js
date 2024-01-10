@@ -62,6 +62,20 @@ export const bodyStyles = StyleSheet.create({
         fontSize: 16,
         padding: 8,
         color: '#000000',
+    },
+    endMatchBtn: {
+        borderWidth: 1,
+        alignItems: 'center',
+        marginLeft: 16,
+        // backgroundColor: '#bdc3c7',
+        borderColor: '#591FFF',
+        borderRadius: 8
+    },
+    endMatchText: {
+        fontWeight: "500",
+        fontSize: 16,
+        padding: 8,
+        color: '#d63031',
     }
 })
 

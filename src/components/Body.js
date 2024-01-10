@@ -18,8 +18,16 @@ export default function Body() {
         handleUndoBtn,
         bowlers,
         currentBowler,
-        changeCurrentBowler
+        changeCurrentBowler,
+        endMatch,
+        saveLastOver
     } = useContext(AppContext);
+
+    const handleEndMatchBtn = () => {
+        saveLastOver();
+        console.log('component oversView : ', oversView);
+        endMatch();
+    }
 
     const handleCustomRunBTn = () => {
         const runObj = {
@@ -64,6 +72,15 @@ export default function Body() {
                 >
                     <Text style={bodyStyles.undoText} >
                         UNDO
+                    </Text>
+                </TouchableOpacity>
+                {/* Match-End Button */}
+                <TouchableOpacity
+                    style={bodyStyles.endMatchBtn}
+                    onPress={handleEndMatchBtn}
+                >
+                    <Text style={bodyStyles.endMatchText} >
+                        END MATCH
                     </Text>
                 </TouchableOpacity>
             </View>
