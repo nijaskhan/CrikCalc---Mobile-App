@@ -47,7 +47,7 @@ export default function LandingPage({ navigation }) {
                     marginTop: 20
                 }}>
                     {
-                        histories?.length > 0 ? histories.map((history) => (
+                        histories?.length > 0 ? histories.slice().reverse().map((history) => (
                             <TouchableOpacity key={history[1]?.matchId} onPress={() => handleSelect(history[1]?.matchId)}>
                                 <GridView
                                     matchId={history[1]?.matchId}
