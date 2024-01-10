@@ -65,7 +65,8 @@ export default function LandingPage({ navigation }) {
                             }}>
                                 <Text style={{
                                     fontSize: 24,
-                                    fontWeight: 'bold'
+                                    fontWeight: 'bold',
+                                    color: '#000000'
                                 }}>No History to show</Text>
                             </View>
                         )
