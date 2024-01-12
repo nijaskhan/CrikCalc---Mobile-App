@@ -25,3 +25,15 @@ export const updateMatchServerDb = async (payload) => {
         return;
     }
 }
+
+export const getAllmatches = async ()=>{
+    try{
+        const response = await axios.get('/api/crick/getAllMatches');
+        // console.log(response.data.data);
+        return response.data.data;
+    }catch(e){
+        console.log("error: ", e);
+        console.log("errorMessage: ", e.message);
+        return [];
+    }
+}

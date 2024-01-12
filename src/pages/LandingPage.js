@@ -12,22 +12,29 @@ import { appStyles } from '../styles/appStyles';
 import { bodyStyles } from '../styles/bodyStyles';
 import HeaderComponent from '../components/Header/HeaderComponent';
 import GridView from '../components/gridView/GridView';
-import { getAllDatas } from '../asyncStorage/apiCalls';
+// import { getAllDatas } from '../asyncStorage/apiCalls';
 import { useFocusEffect } from '@react-navigation/native';
+import { getAllmatches } from '../mongoDb/apiCalls';
 
 export default function LandingPage({ navigation }) {
 
     const [histories, setHistories] = useState();
 
-    const getHistory = async () => {
-        const data = await getAllDatas();
-        // console.log(data);
+    // const getHistory = async () => {
+    //     const data = await getAllDatas();
+    //     // console.log(data);
+    //     setHistories(data);
+    // }
+    const getMatchData = async () => {
+        const data = await getAllmatches();
+        // console.log("matchData ", data);
         setHistories(data);
     }
 
     useFocusEffect(
         React.useCallback(() => {
-            getHistory();
+            // getHistory();
+            getMatchData();
         }, [])
     );
 
@@ -48,13 +55,13 @@ export default function LandingPage({ navigation }) {
                 }}>
                     {
                         histories?.length > 0 ? histories.slice().reverse().map((history) => (
-                            <TouchableOpacity key={history[1]?.matchId} onPress={() => handleSelect(history[1]?.matchId)}>
+                            <TouchableOpacity key={history?.matchId} onPress={() => handleSelect(history?.matchId)}>
                                 <GridView
-                                    matchId={history[1]?.matchId}
-                                    team1={history[1]?.team1?.teamName}
-                                    team2={history[1]?.team2?.teamName}
-                                    wonTeam={history[1]?.wonTeam}
-                                    runsDifference={history[1]?.runsDifference}
+                                    matchId={history?.matchId}
+                                    team1={history?.team1?.teamName}
+                                    team2={history?.team2?.teamName}
+                                    wonTeam={history?.wonTeam}
+                                    runsDifference={history?.runsDifference}
                                 />
                             </TouchableOpacity>
                         )) : (
