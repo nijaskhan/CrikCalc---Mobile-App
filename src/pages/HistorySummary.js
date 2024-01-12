@@ -6,9 +6,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { bodyStyles } from '../styles/bodyStyles';
 import { summaryStyles } from '../styles/summaryPageStyles';
 import { DataTable } from 'react-native-paper';
-import { retrieveData } from '../asyncStorage/apiCalls';
+// import { retrieveData } from '../asyncStorage/apiCalls';
 import { AppContext } from '../store/AppContext';
 import { useRoute } from '@react-navigation/native';
+import { getMatchById } from '../mongoDb/apiCalls';
 
 export default function HistorySummary({ navigation }) {
     const {
@@ -25,7 +26,8 @@ export default function HistorySummary({ navigation }) {
     const matchId = route.params?.matchId;
 
     async function getData(matchId) {
-        const data = await retrieveData(matchId);
+        // const data = await retrieveData(matchId);
+        const data = await getMatchById(matchId);
         // console.log('raw data: ', data);
 
         if (data) {
