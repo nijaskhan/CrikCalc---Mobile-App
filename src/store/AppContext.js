@@ -1,6 +1,7 @@
 import Toast from "react-native-toast-message";
 import { mergeData, resetData, storeData } from "../asyncStorage/apiCalls";
 import { Vibration } from "react-native";
+import { saveMatchServerDb, updateMatchServerDb } from "../mongoDb/apiCalls";
 
 const { createContext, useState } = require("react");
 
@@ -322,7 +323,8 @@ export default function CreateAppContext({ children }) {
                     totalOverView: oversView
                 }
             }
-            await storeData(matchObject);
+            // await storeData(matchObject);
+            await saveMatchServerDb(matchObject);
             changeIsSecondBatting(true);
         } else {
             const updatedValue = {
@@ -331,6 +333,7 @@ export default function CreateAppContext({ children }) {
             }
             setSecondMatchScore(updatedValue);
             const team2 = {
+                matchId: matchId,
                 team2: {
                     teamName: currentTeam,
                     totalPlayers: bowlers.length,
@@ -343,7 +346,8 @@ export default function CreateAppContext({ children }) {
                 wonTeam: wonTeam,
                 runsDifference: runsDifference
             }
-            await mergeData(matchId, team2);
+            // await mergeData(matchId, team2);
+            await updateMatchServerDb(team2);
         }
     }
 

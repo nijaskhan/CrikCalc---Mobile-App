@@ -29,7 +29,8 @@ export default function HistorySummary({ navigation }) {
         // console.log('raw data: ', data);
 
         if (data) {
-            // console.log('rawDta: ', data);
+            // console.log('rawDta: ', data.team1.totalOverView);
+            // console.log('rawData: ', data.team1.totalOverView[0].over);
             setMatchData(data);
 
             const rawStats = getbowlerStatistics(data.team1?.totalOverView);
