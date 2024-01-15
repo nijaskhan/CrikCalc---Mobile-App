@@ -6,7 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { bodyStyles } from '../styles/bodyStyles';
 import { summaryStyles } from '../styles/summaryPageStyles';
 import { DataTable } from 'react-native-paper';
-// import { retrieveData } from '../asyncStorage/apiCalls';
+import { retrieveData } from '../asyncStorage/apiCalls';
 import { AppContext } from '../store/AppContext';
 import { useRoute } from '@react-navigation/native';
 import { getMatchById } from '../mongoDb/apiCalls';

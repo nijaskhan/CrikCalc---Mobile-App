@@ -8,6 +8,7 @@ import { summaryStyles } from '../styles/summaryPageStyles';
 import { DataTable } from 'react-native-paper';
 import { retrieveData } from '../asyncStorage/apiCalls';
 import { AppContext } from '../store/AppContext';
+import { getMatchById } from '../mongoDb/apiCalls';
 
 export default function SummaryPage({ navigation }) {
     const {
@@ -24,7 +25,9 @@ export default function SummaryPage({ navigation }) {
     } = useContext(AppContext);
 
     async function getData(matchId) {
-        const data = await retrieveData(matchId);
+        // const data = await retrieveData(matchId);
+        // console.log(matchId);
+        const data = await getMatchById(matchId);
 
         if (data) {
             // console.log('rawDta: ', data);

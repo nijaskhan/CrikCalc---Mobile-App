@@ -1,3 +1,4 @@
+import Toast from 'react-native-toast-message';
 import axios from '../axios/axiosConfig';
 
 export const saveMatchServerDb = async (payload) => {
@@ -7,6 +8,12 @@ export const saveMatchServerDb = async (payload) => {
         // console.log("response from MongoDB: ", response);
         return;
     } catch (e) {
+        Toast.show({
+            type: 'error',
+            text1: 'You are Offline!',
+            text2: 'Internet connection needed !',
+            visibilityTime: 2000
+        });
         console.log("error: ", e);
         console.log("error message: ", e.message);
         return;
@@ -20,6 +27,12 @@ export const updateMatchServerDb = async (payload) => {
         // console.log("response from MongoDB2: ", response);
         return;
     } catch (e) {
+        Toast.show({
+            type: 'error',
+            text1: 'You are Offline!',
+            text2: 'Internet connection needed !',
+            visibilityTime: 2000
+        });
         console.log("error: ", e);
         console.log("error message: ", e.message);
         return;
@@ -32,6 +45,12 @@ export const getAllmatches = async () => {
         // console.log(response.data.data);
         return response.data.data;
     } catch (e) {
+        Toast.show({
+            type: 'error',
+            text1: 'You are Offline!',
+            text2: 'Internet connection needed !',
+            visibilityTime: 2000
+        });
         console.log("error: ", e);
         console.log("errorMessage: ", e.message);
         return [];
@@ -47,6 +66,12 @@ export const getMatchById = async (payload) => {
         // console.log(response.data.data[0]);
         return response.data.data[0];
     } catch (e) {
+        Toast.show({
+            type: 'error',
+            text1: 'You are Offline!',
+            text2: 'Internet connection needed !',
+            visibilityTime: 2000
+        });
         console.log("error: ", e);
         console.log("errorMessage: ", e.message);
         return null;
