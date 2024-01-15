@@ -6,14 +6,28 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { appStyles } from '../styles/appStyles';
 import { bodyStyles } from '../styles/bodyStyles';
 import Toast from 'react-native-toast-message';
+import { getBowlersApi } from '../mongoDb/apiCalls';
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function SelectOver({ navigation }) {
 
     const {
         totalOvers,
         changeTotalOvers,
-        changeTeams
+        changeTeams,
+        changeBowlers
     } = useContext(AppContext);
+
+    const getBowlers = async () => {
+        const data = await getBowlersApi();
+        changeBowlers(data);
+    }
+
+    useFocusEffect(
+        React.useCallback(() => {
+            getBowlers();
+        }, [])
+    );
 
     const [team1, setTeam1] = useState('');
     const [team2, setTeam2] = useState('');
@@ -21,7 +35,7 @@ export default function SelectOver({ navigation }) {
     const handleSubmit = () => {
         Vibration.vibrate();
         if (totalOvers !== 0 && totalOvers) {
-            if (team1&&team2) {
+            if (team1 && team2) {
                 changeTeams([team1, team2]);
                 navigation.navigate('SelectBattingTeam');
             } else {
@@ -32,7 +46,7 @@ export default function SelectOver({ navigation }) {
                     position: 'top'
                 });
                 changeTeams([]);
-            }   
+            }
         } else {
             Toast.show({
                 type: 'error',

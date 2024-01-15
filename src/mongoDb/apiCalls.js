@@ -60,11 +60,29 @@ export const getAllmatches = async () => {
 export const getMatchById = async (payload) => {
     try {
         const response = await axios.post(
-            '/api/crick/getMatchById', 
+            '/api/crick/getMatchById',
             { matchId: payload }
         );
         // console.log(response.data.data[0]);
         return response.data.data[0];
+    } catch (e) {
+        Toast.show({
+            type: 'error',
+            text1: 'You are Offline!',
+            text2: 'Internet connection needed !',
+            visibilityTime: 2000
+        });
+        console.log("error: ", e);
+        console.log("errorMessage: ", e.message);
+        return null;
+    }
+}
+
+export const getBowlersApi = async () => {
+    try {
+        const response = await axios.get('/api/crick/getBowlers');
+        // return response.data?.data['bowlers'];
+        return response.data?.data[0]?.bowlers;
     } catch (e) {
         Toast.show({
             type: 'error',
