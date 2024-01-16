@@ -15,11 +15,14 @@ export default function SelectOver({ navigation }) {
         totalOvers,
         changeTotalOvers,
         changeTeams,
-        changeBowlers
+        changeBowlers,
+        changeLoadingState
     } = useContext(AppContext);
 
     const getBowlers = async () => {
+        changeLoadingState(true);
         const data = await getBowlersApi();
+        changeLoadingState(false);
         changeBowlers(data);
     }
 

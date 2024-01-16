@@ -184,7 +184,7 @@ export default function CreateAppContext({ children }) {
                     currentOverRunsView.pop();
                     changeRuns(runs - lastRunBtn.score);
                 } else {
-                    console.log('go away !!!');
+                    // console.log('go away !!!');
                     return;
                 }
             } else {
@@ -260,11 +260,11 @@ export default function CreateAppContext({ children }) {
             bowler: currentBowler,
             over: currentOverRunsView
         }
-        console.log('complete over runs view: ', completeOverWithBowler);
+        // console.log('complete over runs view: ', completeOverWithBowler);
 
         changeCurrentOversView([...oversView, completeOverWithBowler]);
 
-        console.log("oversview : ", oversView)
+        // console.log("oversview : ", oversView)
         return;
     }
 

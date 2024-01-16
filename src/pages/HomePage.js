@@ -24,7 +24,8 @@ const HomePage = ({ navigation }) => {
         setRunsDifference,
         setWonTeam,
         setFullMatchFinished,
-        saveLastOver
+        saveLastOver,
+        changeLoadingState
     } = useContext(AppContext);
 
     const changeTeam = () => {
@@ -79,9 +80,11 @@ const HomePage = ({ navigation }) => {
                             animationType="slide"
                             transparent={true}
                             visible={isMatchFinished}
-                            onRequestClose={() => {
+                            onRequestClose={async () => {
                                 if (isSecondBatting) {
-                                    saveMatch();
+                                    changeLoadingState(true);
+                                    await saveMatch();
+                                    changeLoadingState(false);
                                     changeTeam();
                                     // secondmatchReset();
                                 } else {
@@ -100,8 +103,10 @@ const HomePage = ({ navigation }) => {
                                     </Text>
                                     <Pressable
                                         style={[styles.button, styles.buttonClose]}
-                                        onPress={() => {
-                                            saveMatch();
+                                        onPress={async() => {
+                                            changeLoadingState(true);
+                                            await saveMatch();
+                                            changeLoadingState(false);
                                             // navigation.navigate('SummaryPage');
                                             // secondmatchReset();
                                             changeTeam();

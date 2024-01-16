@@ -19,7 +19,8 @@ export default function HistorySummary({ navigation }) {
         setTeam1BowlerStats,
         team1BowlerStats,
         setTeam2BowlerStats,
-        team2BowlerStats
+        team2BowlerStats,
+        changeLoadingState
     } = useContext(AppContext);
 
     const route = useRoute();
@@ -27,6 +28,7 @@ export default function HistorySummary({ navigation }) {
 
     async function getData(matchId) {
         // const data = await retrieveData(matchId);
+        changeLoadingState(true);
         const data = await getMatchById(matchId);
         // console.log('raw data: ', data);
 
@@ -55,6 +57,7 @@ export default function HistorySummary({ navigation }) {
             );
             navigation.navigate('HomePage');
         }
+        changeLoadingState(false);
     }
 
     async function makeBowlerNamesUnique(bowlerStats) {
@@ -81,7 +84,9 @@ export default function HistorySummary({ navigation }) {
     }
 
     useEffect(() => {
-        if (matchId) { getData(matchId) };
+        if (matchId) { 
+            getData(matchId) 
+        };
     }, []);
 
     return (

@@ -22,13 +22,15 @@ export default function SummaryPage({ navigation }) {
         team2BowlerStats,
         wonTeam,
         runsDifference,
+        changeLoadingState
     } = useContext(AppContext);
 
     async function getData(matchId) {
         // const data = await retrieveData(matchId);
         // console.log(matchId);
+        changeLoadingState(true);
         const data = await getMatchById(matchId);
-
+        
         if (data) {
             // console.log('rawDta: ', data);
             setMatchData(data);
@@ -52,6 +54,7 @@ export default function SummaryPage({ navigation }) {
             );
             navigation.navigate('HomePage');
         }
+        changeLoadingState(false);
     }
 
     async function makeBowlerNamesUnique(bowlerStats) {
