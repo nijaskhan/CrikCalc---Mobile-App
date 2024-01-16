@@ -12,6 +12,8 @@ export default function CreateAppContext({ children }) {
     const [customScore, onChangeScore] = useState('');
     const [runs, changeRuns] = useState(0);
 
+    const [isLoading, setIsLoading] = useState(false);
+
     const [currentOver, changeOver] = useState(0);
     const [currentBall, changeBall] = useState(0);
 
@@ -383,6 +385,11 @@ export default function CreateAppContext({ children }) {
         return arrayObjects;
     }
 
+    function changeLoadingState(status) {
+        if(status === true) setIsLoading(true);
+        else setIsLoading(false);
+    }
+
     return (
         <AppContext.Provider
             value={{
@@ -440,7 +447,9 @@ export default function CreateAppContext({ children }) {
                 setRunsDifference,
                 setWonTeam,
                 saveLastOver,
-                endMatch
+                endMatch,
+                isLoading,
+                changeLoadingState
             }}
         >
             {children}

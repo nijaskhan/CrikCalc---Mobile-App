@@ -7,7 +7,7 @@ import {
     SafeAreaView,
     Text
 } from 'react-native';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { appStyles } from '../styles/appStyles';
 import { bodyStyles } from '../styles/bodyStyles';
 import HeaderComponent from '../components/Header/HeaderComponent';
@@ -15,8 +15,14 @@ import GridView from '../components/gridView/GridView';
 // import { getAllDatas } from '../asyncStorage/apiCalls';
 import { useFocusEffect } from '@react-navigation/native';
 import { getAllmatches } from '../mongoDb/apiCalls';
+import { AppContext } from '../store/AppContext';
+import Loader from '../components/Loader/Loader';
 
 export default function LandingPage({ navigation }) {
+    const {
+        isLoading,
+        changeLoadingState
+    } = useContext(AppContext);
 
     const [histories, setHistories] = useState();
 
@@ -26,7 +32,9 @@ export default function LandingPage({ navigation }) {
     //     setHistories(data);
     // }
     const getMatchData = async () => {
+        changeLoadingState(true);
         const data = await getAllmatches();
+        changeLoadingState(false);
         // console.log("matchData ", data);
         setHistories(data);
     }
@@ -45,52 +53,62 @@ export default function LandingPage({ navigation }) {
 
     return (
         <SafeAreaView style={appStyles.container}>
-            <HeaderComponent
-                heading={'Welcome,'}
-                subheading={'Click next to start a New Match'}
-            />
-            <ScrollView style={bodyStyles.mainContainer}>
-                <View style={{
-                    marginTop: 20
-                }}>
-                    {
-                        histories?.length > 0 ? histories.slice().reverse().map((history) => (
-                            <TouchableOpacity key={history?.matchId} onPress={() => handleSelect(history?.matchId)}>
-                                <GridView
-                                    matchId={history?.matchId}
-                                    team1={history?.team1?.teamName}
-                                    team2={history?.team2?.teamName}
-                                    wonTeam={history?.wonTeam}
-                                    runsDifference={history?.runsDifference}
-                                />
-                            </TouchableOpacity>
-                        )) : (
+            {
+                isLoading ? (
+                    <>
+                        <Loader isLoading={isLoading} />
+                    </>
+                ) : (
+                    <>
+                        <HeaderComponent
+                            heading={'Welcome,'}
+                            subheading={'Click next to start a New Match'}
+                        />
+                        <ScrollView style={bodyStyles.mainContainer}>
                             <View style={{
-                                flex: 1,
-                                alignItems: 'center',
-                                marginTop: 50
+                                marginTop: 20
                             }}>
-                                <Text style={{
-                                    fontSize: 24,
-                                    fontWeight: 'bold',
-                                    color: '#000000'
-                                }}>No History to show</Text>
+                                {
+                                    histories?.length > 0 ? histories.slice().reverse().map((history) => (
+                                        <TouchableOpacity key={history?.matchId} onPress={() => handleSelect(history?.matchId)}>
+                                            <GridView
+                                                matchId={history?.matchId}
+                                                team1={history?.team1?.teamName}
+                                                team2={history?.team2?.teamName}
+                                                wonTeam={history?.wonTeam}
+                                                runsDifference={history?.runsDifference}
+                                            />
+                                        </TouchableOpacity>
+                                    )) : (
+                                        <View style={{
+                                            flex: 1,
+                                            alignItems: 'center',
+                                            marginTop: 50
+                                        }}>
+                                            <Text style={{
+                                                fontSize: 24,
+                                                fontWeight: 'bold',
+                                                color: '#000000'
+                                            }}>No History to show</Text>
+                                        </View>
+                                    )
+                                }
                             </View>
-                        )
-                    }
-                </View>
-            </ScrollView>
-            <TouchableOpacity
-                onPress={() => {
-                    navigation.navigate('SelectOverPage')
-                }}
-                style={styles.floatingButton}
-            >
-                <Image
-                    source={require('../images/rightArrow.png')}
-                    style={{ width: 70, height: 70 }}
-                />
-            </TouchableOpacity>
+                        </ScrollView>
+                        <TouchableOpacity
+                            onPress={() => {
+                                navigation.navigate('SelectOverPage')
+                            }}
+                            style={styles.floatingButton}
+                        >
+                            <Image
+                                source={require('../images/rightArrow.png')}
+                                style={{ width: 70, height: 70 }}
+                            />
+                        </TouchableOpacity>
+                    </>
+                )
+            }
         </SafeAreaView>
     )
 }
