@@ -16,8 +16,8 @@ const Header = ({ navigation }) => {
 
     const showAlert = () => {
         Alert.alert(
-            'Do you want to reset the game ?',
-            'If you reset the game the saved match history will lost',
+            'Do you want to end the game ?',
+            'If you end the game the match will be saved to match history!',
             [
                 {
                     text: 'Cancel',
@@ -68,7 +68,7 @@ const Header = ({ navigation }) => {
                         onPress={showAlert}
                     >
                         <Text style={headerStyles.resetText} >
-                            RESET
+                            END MATCH
                         </Text>
                     </TouchableOpacity>
                 </View>

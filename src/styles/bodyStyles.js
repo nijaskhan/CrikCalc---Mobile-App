@@ -9,9 +9,10 @@ export const bodyStyles = StyleSheet.create({
         alignItems: 'center',
     },
     mainContainer: {
-        borderTopLeftRadius: 25,
-        borderTopRightRadius: 25,
-        backgroundColor: '#ffffff'
+        // borderTopLeftRadius: 25,
+        // borderTopRightRadius: 25,
+        backgroundColor: '#ffffff',
+        // height: '70%',
     },
     textInputContainer: {
         // width: '80%', 

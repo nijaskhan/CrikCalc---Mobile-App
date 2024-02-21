@@ -80,7 +80,7 @@ export default function Body() {
                     onPress={handleEndMatchBtn}
                 >
                     <Text style={bodyStyles.endMatchText} >
-                        END MATCH
+                        END INNINGS
                     </Text>
                 </TouchableOpacity>
             </View>
