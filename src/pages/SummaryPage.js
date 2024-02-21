@@ -49,7 +49,7 @@ export default function SummaryPage({ navigation }) {
 
         } else {
             Alert.alert(
-                'what are you looking ?...Nothing to see here',
+                'what are you looking ?',
                 'you have to finish atleast one match to see the Match Summary !!'
             );
             navigation.navigate('HomePage');

@@ -1,5 +1,5 @@
 import { Alert, Text, TouchableOpacity, View } from 'react-native';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { headerStyles } from '../styles/headerStyles';
 import { AppContext } from '../store/AppContext';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -8,11 +8,26 @@ const Header = ({ navigation }) => {
     const {
         currentOver,
         currentBall,
+        totalOvers,
         runs,
         wickets,
         handleReset,
-        currentTeam
+        currentTeam,
+        isSecondBatting,
+        firstMatchScore,
+        wonTeam,
+        runsDifference
     } = useContext(AppContext);
+
+    useEffect(() => {
+        console.log('firstMatchScore', firstMatchScore);
+        console.log('currentOver', currentOver);
+        console.log('currentBall', currentBall);
+    }, [firstMatchScore]);
+
+    useEffect(() => {
+
+    }, [wonTeam])
 
     const showAlert = () => {
         Alert.alert(
@@ -21,12 +36,12 @@ const Header = ({ navigation }) => {
             [
                 {
                     text: 'Cancel',
-                    onPress: () => console.log('cancel pressed'),
+                    onPress: undefined,
                     style: 'cancel',
                 },
                 {
                     text: 'OK',
-                    onPress: ()=>{
+                    onPress: () => {
                         handleReset();
                         navigation.navigate('landingPage');
                     },
@@ -55,6 +70,18 @@ const Header = ({ navigation }) => {
                 <View style={headerStyles.textTitleContainer}>
                     <Text style={headerStyles.textTitle}>Total runs ({currentTeam})</Text>
                     <Text style={headerStyles.textRuns}>{runs} - {wickets}</Text>
+                    {
+                        isSecondBatting && <Text style={{
+                            color: '#ffffff',
+                            paddingTop: 8,
+                            fontSize: 14,
+                            fontWeight: 500,
+                            paddingBottom: 15,
+                            letterSpacing: 0.5
+                        }}>{!wonTeam && !runsDifference
+                            ? `${currentTeam} needs ${(firstMatchScore?.totalRuns + 1) - runs} runs to win in ${(totalOvers * 6) - ((currentOver * 6) + currentBall)} balls`
+                            : `${wonTeam} won match by ${runsDifference} runs`}</Text>
+                    }
                 </View>
                 <View style={headerStyles.overTextContainer}>
                     <Text
