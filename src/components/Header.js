@@ -19,16 +19,6 @@ const Header = ({ navigation }) => {
         runsDifference
     } = useContext(AppContext);
 
-    useEffect(() => {
-        console.log('firstMatchScore', firstMatchScore);
-        console.log('currentOver', currentOver);
-        console.log('currentBall', currentBall);
-    }, [firstMatchScore]);
-
-    useEffect(() => {
-
-    }, [wonTeam])
-
     const showAlert = () => {
         Alert.alert(
             'Do you want to end the game ?',
