@@ -8,6 +8,7 @@ import { bodyStyles } from '../styles/bodyStyles';
 import Toast from 'react-native-toast-message';
 import { getBowlersApi } from '../mongoDb/apiCalls';
 import { useFocusEffect } from '@react-navigation/native';
+import CMButton from '../components/Button';
 
 export default function SelectOver({ navigation }) {
 
@@ -103,10 +104,7 @@ export default function SelectOver({ navigation }) {
                     </View>
                     <TouchableOpacity onPress={handleSubmit}>
                         <View style={styles.container} >
-                            <Image
-                                source={require('../images/rightArrow.png')}
-                                style={{ width: 70, height: 70, marginTop: 25 }}
-                            />
+                            <CMButton label={'Next'} />
                         </View>
                     </TouchableOpacity>
                 </View>

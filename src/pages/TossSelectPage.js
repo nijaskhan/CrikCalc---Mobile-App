@@ -6,6 +6,7 @@ import { bodyStyles } from '../styles/bodyStyles';
 import HeaderComponent from '../components/Header/HeaderComponent';
 import { AppContext } from '../store/AppContext';
 import Toast from 'react-native-toast-message';
+import CMButton from '../components/Button';
 
 export default function TossSelectPage({ navigation }) {
     const {
@@ -37,14 +38,14 @@ export default function TossSelectPage({ navigation }) {
                     {
                         teams?.map((team) =>
                         (
-                            <TouchableOpacity 
+                            <TouchableOpacity
                                 key={team}
                                 onPress={() => {
                                     handleTeam(team);
                                 }}
                             >
                                 <View style={[styles.centerInput, {
-                                    backgroundColor: currentTeam===team ? '#95afc0' : 'transparent'
+                                    backgroundColor: currentTeam === team ? '#95afc0' : 'transparent'
                                 }]}>
                                     <Text style={styles.input} >
                                         {team}
@@ -56,10 +57,7 @@ export default function TossSelectPage({ navigation }) {
                     }
                     <TouchableOpacity onPress={handleSubmit}>
                         <View style={styles.container} >
-                            <Image
-                                source={require('../images/rightArrow.png')}
-                                style={{ width: 70, height: 70, marginTop: 25 }}
-                            />
+                            <CMButton label={'Start Match'} />
                         </View>
                     </TouchableOpacity>
                 </View>

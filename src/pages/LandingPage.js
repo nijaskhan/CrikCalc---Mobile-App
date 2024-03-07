@@ -17,11 +17,13 @@ import { useFocusEffect } from '@react-navigation/native';
 import { getAllmatches } from '../mongoDb/apiCalls';
 import { AppContext } from '../store/AppContext';
 import Loader from '../components/Loader/Loader';
+import CMButton from '../components/Button';
 
 export default function LandingPage({ navigation }) {
     const {
         isLoading,
-        changeLoadingState
+        changeLoadingState,
+        convertDateFormatWithTime
     } = useContext(AppContext);
 
     const [histories, setHistories] = useState();
@@ -36,6 +38,12 @@ export default function LandingPage({ navigation }) {
         const data = await getAllmatches();
         changeLoadingState(false);
         // console.log("matchData ", data);
+        data.forEach((obj) => {
+            if (obj.createdAt) {
+                // console.log(obj);
+                obj.createdAt = convertDateFormatWithTime(obj?.createdAt);
+            }
+        });
         setHistories(data);
     }
 
@@ -77,6 +85,7 @@ export default function LandingPage({ navigation }) {
                                                 team2={history?.team2?.teamName}
                                                 wonTeam={history?.wonTeam}
                                                 runsDifference={history?.runsDifference}
+                                                date={history.createdAt ? history?.createdAt : null}
                                             />
                                         </TouchableOpacity>
                                     )) : (
@@ -101,10 +110,7 @@ export default function LandingPage({ navigation }) {
                             }}
                             style={styles.floatingButton}
                         >
-                            <Image
-                                source={require('../images/rightArrow.png')}
-                                style={{ width: 70, height: 70 }}
-                            />
+                            <CMButton label={'start new match'} color={'#DCDCDC'} />
                         </TouchableOpacity>
                     </>
                 )
@@ -141,13 +147,12 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 20,
         right: 20,
-        backgroundColor: 'blue', // Set your desired background color
-        borderRadius: 35, // Half of the width and height to make it a circle
-        width: 70,
-        height: 70,
-        justifyContent: 'center',
-        alignItems: 'center',
-        elevation: 5, // For shadow on Android
+        // backgroundColor: 'blue', // Set your desired background color
+        // borderRadius: 35, // Half of the width and height to make it a circle
+        // width: 70,
+        // height: 70,
+        // justifyContent: 'center', 
+        // alignItems: 'center',
     },
     GridView: {
         flex: 1

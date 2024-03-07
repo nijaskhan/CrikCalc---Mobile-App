@@ -306,7 +306,8 @@ export default function CreateAppContext({ children }) {
                     overs: `${currentOver}.${currentBall}`,
                     wickets: wickets,
                     totalOverView: oversView
-                }
+                },
+                createdAt: Date.now(),
             }
             // await storeData(matchObject);
             await saveMatchServerDb(matchObject);
@@ -342,6 +343,15 @@ export default function CreateAppContext({ children }) {
 
         return timestamp + randomPart;
     }
+
+    function convertDateFormatWithTime(inputDate) {
+        let originalDate = new Date(inputDate);
+
+        originalDate = originalDate.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
+    
+        return originalDate;
+    }
+
 
     // function to calculate bowler stats
     function getbowlerStatistics(totalOverViews) {
@@ -386,7 +396,7 @@ export default function CreateAppContext({ children }) {
     }
 
     function changeLoadingState(status) {
-        if(status === true) setIsLoading(true);
+        if (status === true) setIsLoading(true);
         else setIsLoading(false);
     }
 
@@ -449,7 +459,8 @@ export default function CreateAppContext({ children }) {
                 saveLastOver,
                 endMatch,
                 isLoading,
-                changeLoadingState
+                changeLoadingState,
+                convertDateFormatWithTime
             }}
         >
             {children}
