@@ -110,6 +110,17 @@ export default function CreateAppContext({ children }) {
 
     const handleOver = (runsObj) => {
 
+        if (!currentBowler) {
+            Toast.show({
+                type: 'info',
+                text1: 'Select a Bowler',
+                text2: 'Select a bowler before starting the over',
+                visibilityTime: 2000
+            });
+            Vibration.vibrate(80);
+            return;
+        }
+
         if (isMatchFinished) {
             return;
         }
