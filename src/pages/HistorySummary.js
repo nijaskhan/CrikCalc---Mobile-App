@@ -29,8 +29,9 @@ export default function HistorySummary({ navigation }) {
     async function getData(matchId) {
         // const data = await retrieveData(matchId);
         changeLoadingState(true);
-        const data = await getMatchById(matchId);
-        // console.log('raw data: ', data);
+        // const data = await getMatchById(matchId);
+        const data = await retrieveData(matchId);
+        console.log('raw data: ', data);
 
         if (data) {
             // console.log('rawDta: ', data.team1.totalOverView);

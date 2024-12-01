@@ -28,7 +28,24 @@ export default function CreateAppContext({ children }) {
 
     // new changes to keep a track of bowlers
 
-    const [bowlers, changeBowlers] = useState([]);
+    const [bowlers, changeBowlers] = useState([
+        "Achuz",
+        "Abhi",
+        "Alwin",
+        "Anil",
+        "Arshad",
+        "Chikku",
+        "George",
+        "Hari",
+        "Nijas khan",
+        "Nijas m",
+        "Rahul Raju",
+        "Rahul B",
+        "Raj",
+        "Riyas",
+        "Sreeni",
+        "Varghese"
+    ]);
     const [currentBowler, changeCurrentBowler] = useState('');
 
     // for match-summary page
@@ -309,8 +326,8 @@ export default function CreateAppContext({ children }) {
                 },
                 createdAt: Date.now(),
             }
-            // await storeData(matchObject);
-            await saveMatchServerDb(matchObject);
+            await storeData(matchObject);
+            // await saveMatchServerDb(matchObject);
             changeIsSecondBatting(true);
         } else {
             const updatedValue = {
@@ -332,8 +349,8 @@ export default function CreateAppContext({ children }) {
                 wonTeam: wonTeam,
                 runsDifference: runsDifference
             }
-            // await mergeData(matchId, team2);
-            await updateMatchServerDb(team2);
+            await mergeData(matchId, team2);
+            // await updateMatchServerDb(team2);
         }
     }
 
@@ -348,7 +365,7 @@ export default function CreateAppContext({ children }) {
         let originalDate = new Date(inputDate);
 
         originalDate = originalDate.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
-    
+
         return originalDate;
     }
 

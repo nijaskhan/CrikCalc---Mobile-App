@@ -29,19 +29,20 @@ export default function SummaryPage({ navigation }) {
         // const data = await retrieveData(matchId);
         // console.log(matchId);
         changeLoadingState(true);
-        const data = await getMatchById(matchId);
+        // const data = await getMatchById(matchId);
+        const data = await retrieveData(matchId);
         
         if (data) {
             // console.log('rawDta: ', data);
             setMatchData(data);
 
-            const rawStats = getbowlerStatistics(data.team1.totalOverView);
+            const rawStats = getbowlerStatistics(data?.team1?.totalOverView);
             const stats = await makeBowlerNamesUnique(rawStats);
             // console.log("stats: ", stats);
             setTeam1BowlerStats(stats);
 
             if (data?.team2) {
-                const rawStats2 = getbowlerStatistics(data.team2?.totalOverView);
+                const rawStats2 = getbowlerStatistics(data?.team2?.totalOverView);
                 const stats2 = await makeBowlerNamesUnique(rawStats2);
                 // console.log("stats2: ", stats2);
                 setTeam2BowlerStats(stats2);

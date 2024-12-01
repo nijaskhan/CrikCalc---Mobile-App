@@ -25,7 +25,7 @@ export default function Body() {
 
     const handleEndMatchBtn = () => {
         saveLastOver();
-        console.log('component oversView : ', oversView);
+        // console.log('component oversView : ', oversView);
         endMatch();
     }
 

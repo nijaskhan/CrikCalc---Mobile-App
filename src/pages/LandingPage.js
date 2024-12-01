@@ -18,6 +18,7 @@ import { getAllmatches } from '../mongoDb/apiCalls';
 import { AppContext } from '../store/AppContext';
 import Loader from '../components/Loader/Loader';
 import CMButton from '../components/Button';
+import { getAllDatas } from '../asyncStorage/apiCalls';
 
 export default function LandingPage({ navigation }) {
     const {
@@ -28,29 +29,36 @@ export default function LandingPage({ navigation }) {
 
     const [histories, setHistories] = useState();
 
-    // const getHistory = async () => {
-    //     const data = await getAllDatas();
-    //     // console.log(data);
-    //     setHistories(data);
-    // }
-    const getMatchData = async () => {
-        changeLoadingState(true);
-        const data = await getAllmatches();
-        changeLoadingState(false);
-        // console.log("matchData ", data);
-        data.forEach((obj) => {
-            if (obj.createdAt) {
+    const getHistory = async () => {
+        const data = await getAllDatas();
+        data.forEach(([matchId, details]) => {
+            if (details?.createdAt) {
                 // console.log(obj);
-                obj.createdAt = convertDateFormatWithTime(obj?.createdAt);
+                details.createdAt = convertDateFormatWithTime(details?.createdAt);
             }
         });
+
+        // console.log(data);
         setHistories(data);
     }
+    // const getMatchData = async () => {
+    //     changeLoadingState(true);
+    //     const data = await getAllmatches();
+    //     changeLoadingState(false);
+    //     // console.log("matchData ", data);
+    //     data.forEach((obj) => {
+    //         if (obj?.createdAt) {
+    //             // console.log(obj);
+    //             obj.createdAt = convertDateFormatWithTime(obj?.createdAt);
+    //         }
+    //     });
+    //     setHistories(data);
+    // }
 
     useFocusEffect(
         React.useCallback(() => {
-            // getHistory();
-            getMatchData();
+            getHistory();
+            // getMatchData();
         }, [])
     );
 
@@ -76,31 +84,43 @@ export default function LandingPage({ navigation }) {
                             <View style={{
                                 marginTop: 20
                             }}>
+                                {/* ? histories.slice().reverse().map((history) => (
+                                    <TouchableOpacity key={history?.matchId} onPress={() => handleSelect(history?.matchId)}>
+                                        <GridView
+                                            matchId={history?.matchId}
+                                            team1={history?.team1?.teamName}
+                                            team2={history?.team2?.teamName}
+                                            wonTeam={history?.wonTeam}
+                                            runsDifference={history?.runsDifference}
+                                            date={history.createdAt ? history?.createdAt : null}
+                                        />
+                                    </TouchableOpacity> */}
                                 {
-                                    histories?.length > 0 ? histories.slice().reverse().map((history) => (
-                                        <TouchableOpacity key={history?.matchId} onPress={() => handleSelect(history?.matchId)}>
-                                            <GridView
-                                                matchId={history?.matchId}
-                                                team1={history?.team1?.teamName}
-                                                team2={history?.team2?.teamName}
-                                                wonTeam={history?.wonTeam}
-                                                runsDifference={history?.runsDifference}
-                                                date={history.createdAt ? history?.createdAt : null}
-                                            />
-                                        </TouchableOpacity>
-                                    )) : (
-                                        <View style={{
-                                            flex: 1,
-                                            alignItems: 'center',
-                                            marginTop: 50
-                                        }}>
-                                            <Text style={{
-                                                fontSize: 24,
-                                                fontWeight: 'bold',
-                                                color: '#000000'
-                                            }}>No History to show</Text>
-                                        </View>
-                                    )
+                                    histories?.length > 0
+                                        ? histories.slice().reverse().map(([matchId, details]) => (
+                                            <TouchableOpacity key={matchId} onPress={() => handleSelect(matchId)}>
+                                                <GridView
+                                                    matchId={matchId}
+                                                    team1={details?.team1?.teamName}
+                                                    team2={details?.team2?.teamName}
+                                                    wonTeam={details?.wonTeam}
+                                                    runsDifference={details?.runsDifference}
+                                                    date={details.createdAt ? details?.createdAt : null}
+                                                />
+                                            </TouchableOpacity>
+                                        )) : (
+                                            <View style={{
+                                                flex: 1,
+                                                alignItems: 'center',
+                                                marginTop: 50
+                                            }}>
+                                                <Text style={{
+                                                    fontSize: 24,
+                                                    fontWeight: 'bold',
+                                                    color: '#000000'
+                                                }}>No History to show</Text>
+                                            </View>
+                                        )
                                 }
                             </View>
                         </ScrollView>

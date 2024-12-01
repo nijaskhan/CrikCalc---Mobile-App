@@ -22,9 +22,10 @@ export default function SelectOver({ navigation }) {
 
     const getBowlers = async () => {
         changeLoadingState(true);
-        const data = await getBowlersApi();
+        // const data2 = await getBowlersApi();
+        // console.log("data2: ", data2);
         changeLoadingState(false);
-        changeBowlers(data);
+        // changeBowlers(data);
     }
 
     useFocusEffect(
